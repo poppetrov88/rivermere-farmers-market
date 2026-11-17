@@ -1,0 +1,15 @@
+.ri .ri-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 20px; }
+.ri .ri-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 16px 0 24px; }
+.ri .ri-card { padding: 16px 18px; background: #fff; border: 1px solid #dcdcde; border-left: 4px solid #1d6806; border-radius: 6px; }
+.ri .ri-card__label { color: #50575e; font-size: 13px; font-weight: 600; }
+.ri .ri-card__value { margin-top: 4px; color: #1d2327; font-size: 30px; font-weight: 700; line-height: 1.1; }
+.ri .ri-card__note { margin-top: 4px; color: #646970; font-size: 12px; }
+.ri .ri-chart { margin: 0 0 8px; padding: 12px; background: #fff; border: 1px solid #dcdcde; border-radius: 6px; }
+.ri .ri-chart svg { display: block; width: 100%; height: auto; }
+.ri .ri-chart figcaption { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; font-size: 13px; }
+.ri .ri-key i { display: inline-block; width: 12px; height: 12px; margin-right: 6px; border-radius: 3px; vertical-align: -1px; }
+.ri .ri-table-details { margin-bottom: 24px; }
+.ri .ri-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+.ri .ri-status { display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: 600; }
+.ri .ri-status--ok { background: #edfaef; color: #0a5b1f; }
+.ri .ri-status--warn { background: #fcf9e8; color: #6b4f00; }
