@@ -43,6 +43,7 @@ function rivermere_demo_find( $key, $post_type ) {
 function rivermere_demo_image( $file, $alt ) {
 	$existing = rivermere_demo_find( 'img-' . $file, 'attachment' );
 	if ( $existing ) {
+		rivermere_demo_apply_image_meta( $existing, $file );
 		return $existing;
 	}
 	$source = trailingslashit( get_theme_root() ) . 'rivermere-market/assets/images/' . $file;
@@ -62,7 +63,86 @@ function rivermere_demo_image( $file, $alt ) {
 	}
 	update_post_meta( $id, '_wp_attachment_image_alt', $alt );
 	update_post_meta( $id, '_rivermere_demo', 'img-' . $file );
+	rivermere_demo_apply_image_meta( $id, $file );
 	return (int) $id;
+}
+
+/**
+ * Descriptive metadata for the bundled placeholder images (what is actually visible in each).
+ * These are crops of the design mock-up, NOT licensed photography.
+ *
+ * @return array<string,array<string,string>>
+ */
+function rivermere_demo_image_meta() {
+	$note = ' Placeholder image cropped from the project design mock-up; not licensed photography. Replace before launch.';
+	return array(
+		'placeholder-hero.webp'            => array(
+			'title'       => 'Vendor holding a crate of fresh vegetables at an outdoor market',
+			'alt'         => 'Smiling woman in a straw hat holding a wooden crate of lettuce, carrots, radishes and tomatoes at an outdoor farmers market',
+			'caption'     => '',
+			'description' => 'A smiling market vendor in a straw hat and green apron holds a wooden crate of fresh produce, with market tents and shoppers blurred in the background.' . $note,
+		),
+		'placeholder-community.webp'       => array(
+			'title'       => 'Shoppers and stalls beside a Farmers Market chalkboard sign',
+			'alt'         => 'Shoppers walking between white-canopy market stalls, with sunflowers and a chalkboard sign reading Farmers Market, This Sunday, 9 AM to 1 PM',
+			'caption'     => 'A busy Sunday at the market.',
+			'description' => 'A paved market lane lined with white canopies and flower stalls. A chalkboard sign in the foreground announces the Sunday opening hours.' . $note,
+		),
+		'placeholder-event.webp'           => array(
+			'title'       => 'Sunflowers in bloom',
+			'alt'         => 'Bright yellow sunflowers with green leaves',
+			'caption'     => 'Sunflowers in bloom.',
+			'description' => 'Close view of several large yellow sunflowers and leaves, used as the thumbnail for the Harvest Festival.' . $note,
+		),
+		'placeholder-vendor-produce.webp'  => array(
+			'title'       => 'Fresh tomatoes and leafy greens',
+			'alt'         => 'Ripe red tomatoes and leafy green vegetables on a market stall',
+			'caption'     => '',
+			'description' => 'Red tomatoes and green leaves piled on a stall, representing the GreenField Farm produce vendor.' . $note,
+		),
+		'placeholder-vendor-dairy.webp'    => array(
+			'title'       => 'Artisan cheeses on a board',
+			'alt'         => 'Several wedges and blocks of artisan cheese on a wooden board',
+			'caption'     => '',
+			'description' => 'Wedges of pale cheese with rinds on a wooden board, representing the Lakeside Creamery vendor.' . $note,
+		),
+		'placeholder-vendor-honey.webp'    => array(
+			'title'       => 'Jars of golden honey',
+			'alt'         => 'Glass jars of golden honey lined up on a table',
+			'caption'     => '',
+			'description' => 'Several glass jars filled with amber honey, representing the Rivermere Honey Co. vendor.' . $note,
+		),
+		'placeholder-vendor-crafts.webp'   => array(
+			'title'       => 'Handmade glazed pottery',
+			'alt'         => 'Hand-made glazed ceramic jugs and mugs on a wooden shelf',
+			'caption'     => '',
+			'description' => 'Glazed ceramic jugs and mugs in muted blue and cream tones, representing the Willow Creek Crafts vendor.' . $note,
+		),
+	);
+}
+
+/**
+ * Apply title, alt, caption and description to a demo attachment (only when its description is
+ * still empty, so editor changes are never overwritten).
+ *
+ * @param int    $id   Attachment ID.
+ * @param string $file Filename key.
+ */
+function rivermere_demo_apply_image_meta( $id, $file ) {
+	$all = rivermere_demo_image_meta();
+	if ( ! $id || ! isset( $all[ $file ] ) || '' !== trim( (string) get_post_field( 'post_content', $id ) ) ) {
+		return;
+	}
+	$m = $all[ $file ];
+	wp_update_post(
+		array(
+			'ID'           => $id,
+			'post_title'   => $m['title'],
+			'post_excerpt' => $m['caption'],
+			'post_content' => $m['description'],
+		)
+	);
+	update_post_meta( $id, '_wp_attachment_image_alt', $m['alt'] );
 }
 
 /**
@@ -98,6 +178,11 @@ function rivermere_demo_import() {
 	}
 	if ( ! post_type_exists( 'rm_vendor' ) ) {
 		return array( 'Post types are not registered; activate the Rivermere Core plugin.' );
+	}
+
+	// 0. Image metadata for any already-imported placeholder images.
+	foreach ( array_keys( rivermere_demo_image_meta() ) as $img_file ) {
+		rivermere_demo_apply_image_meta( rivermere_demo_find( 'img-' . $img_file, 'attachment' ), $img_file );
 	}
 
 	// 1. Product categories (term meta marks demo terms).
@@ -174,7 +259,9 @@ function rivermere_demo_import() {
 			)
 		);
 		if ( $id && $created ) {
-			$day = wp_date( 'Y-m-d', strtotime( $e[2] ) );
+			$ts  = strtotime( $e[2] );
+			$ts += ( ( 7 - (int) wp_date( 'w', $ts ) ) % 7 ) * DAY_IN_SECONDS; // Move to the following Sunday.
+			$day = wp_date( 'Y-m-d', $ts );
 			update_field( 'event_tagline', $e[1], $id );
 			update_field( 'event_start', $day . ' ' . $e[3], $id );
 			update_field( 'event_end', $day . ' ' . $e[4], $id );
@@ -187,6 +274,12 @@ function rivermere_demo_import() {
 			}
 			$log[] = 'Created event: ' . $e[0];
 		}
+	}
+
+	// Harvest Festival: rich demo details (only fills a still-empty event).
+	$harvest = rivermere_demo_find( 'event-harvest', 'rm_event' );
+	if ( $harvest && function_exists( 'rivermere_demo_event_details' ) && rivermere_demo_event_details( $harvest ) ) {
+		$log[] = 'Added Harvest Festival details';
 	}
 
 	// 4. Pages.
@@ -261,7 +354,6 @@ function rivermere_demo_import() {
 		'market-info' => array( 'Market Info', 'Opening hours, location and how to get here. (Demo content — edit me.)' ),
 		'events'      => array( 'Events', 'See upcoming events at the market.' ),
 		'about'       => array( 'About', 'Rivermere Farmers Market is a fictional demonstration market. (Demo content — edit me.)' ),
-		'privacy-policy' => array( 'Privacy Policy', 'Replace this placeholder with your privacy policy. Newsletter emails are stored only to send market updates and can be removed on request.' ),
 	);
 	foreach ( $stub_pages as $slug => $p ) {
 		if ( 'vendors' === $slug || 'events' === $slug ) {
@@ -279,6 +371,11 @@ function rivermere_demo_import() {
 		if ( $created ) {
 			$log[] = 'Created page: ' . $p[0];
 		}
+	}
+
+	// Legal pages (Privacy, Terms, Cookies).
+	if ( function_exists( 'rivermere_demo_legal' ) ) {
+		$log = array_merge( $log, rivermere_demo_legal() );
 	}
 
 	// 5. Front page setting (only if no front page is configured yet).
@@ -333,10 +430,6 @@ function rivermere_demo_import() {
 			update_field( $name, $value, 'option' );
 		}
 	}
-	$privacy = get_page_by_path( 'privacy-policy' );
-	if ( $privacy && ! get_field( 'privacy_page', 'option' ) ) {
-		update_field( 'privacy_page', get_permalink( $privacy ), 'option' );
-	}
 	if ( ! get_option( 'rivermere_demo_imported' ) ) {
 		update_option( 'rivermere_demo_imported', gmdate( 'c' ), false );
 		flush_rewrite_rules();
@@ -350,6 +443,18 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	 * Rivermere helper commands.
 	 */
 	class Rivermere_CLI {
+		/**
+		 * Import ACF Local JSON groups into the database (so they show in ACF → Field Groups).
+		 *
+		 * @subcommand acf-sync
+		 */
+		public function acf_sync() {
+			foreach ( rivermere_core_acf_sync() as $line ) {
+				WP_CLI::log( $line );
+			}
+			WP_CLI::success( 'ACF sync finished.' );
+		}
+
 		/**
 		 * Import (idempotent) fictional demo content.
 		 *

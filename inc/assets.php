@@ -51,7 +51,7 @@ function rivermere_enqueue_assets() {
 			'i18n'               => array(
 				'sending'      => __( 'Subscribing…', 'rivermere-market' ),
 				'invalidEmail' => __( 'Please enter a valid email address.', 'rivermere-market' ),
-				'consent'      => __( 'Please tick the consent box to subscribe.', 'rivermere-market' ),
+				'consent'      => __( 'Please tick the box to confirm you agree to receive our emails.', 'rivermere-market' ),
 				'genericError' => __( 'Something went wrong. Please try again later.', 'rivermere-market' ),
 				'subscribe'    => __( 'Subscribe', 'rivermere-market' ),
 				'langSoon'     => __( 'Translations are coming soon. The site is currently available in English.', 'rivermere-market' ),

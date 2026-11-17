@@ -13,6 +13,7 @@ defined( 'ABSPATH' ) || exit;
 </footer>
 
 <?php get_template_part( 'template-parts/components/contact-widget' ); ?>
+<?php get_template_part( 'template-parts/components/cookie-consent' ); ?>
 <div class="toast" role="status" aria-live="polite" data-toast></div>
 
 <?php wp_footer(); ?>

@@ -79,7 +79,7 @@
   // Desktop: photo on the right, green shape with organic curved edge on the left.
   @include m.up(lg) {
     display: block;
-    min-height: clamp(430px, 42vw, 640px);
+    min-height: clamp(430px, 38vw, 560px);
 
     &__media {
       position: absolute;
@@ -116,25 +116,17 @@
       padding-block: clamp(30px, 4.2vw, 64px) var(--sp-9);
     }
 
-    &__content { max-width: 47%; }
+    // Same .container as the header; the text column keeps a readable measure.
+    &__content { max-width: 560px; }
 
     &__highlights {
       position: absolute;
       bottom: clamp(24px, 3.4vw, 48px);
-      left: calc(var(--gutter) - 12px);
+      left: var(--gutter);
       flex-wrap: nowrap;
       gap: var(--sp-5);
     }
   }
 
-  @include m.up(xl) {
-    &__highlights { left: max(calc(var(--gutter) - 12px), calc((100vw - var(--container)) / 2)); }
-  }
-
 }
 
-// On very wide screens the text column stays aligned to the container.
-@include m.up(lg) {
-  .hero__inner { max-width: none; }
-  .hero__content { width: 100%; }
-}

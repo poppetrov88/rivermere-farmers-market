@@ -1,6 +1,8 @@
 import puppeteer from 'puppeteer-core';
 const B = 'http://rivermere-farmers-market.local';
 const browser = await puppeteer.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true });
+// Pre-set a stored cookie choice so the first-visit banner does not cover the page under test.
+await browser.setCookie({ name: 'rm_consent', value: encodeURIComponent(JSON.stringify({ v: 1, n: 1, a: 0, m: 0, t: new Date().toISOString() })), domain: 'rivermere-farmers-market.local', path: '/' });
 const res = [];
 const ok = (n, c, extra = '') => res.push(`${c ? 'PASS' : 'FAIL'} ${n} ${extra}`);
 const errs = [];
@@ -42,7 +44,7 @@ const submit = async (email, consent) => {
 let s = await submit('not-an-email', true);
 ok('invalid email rejected', s.startsWith('error'), s);
 s = await submit('Test.User+demo@Example.com', false);
-ok('consent required', s.startsWith('error'), s);
+ok('consent required (inline error shown)', await page.$eval('#newsletter-consent-error', (e) => !e.hidden && e.textContent.length > 10));
 s = await submit('Test.User+demo@Example.com', true);
 ok('subscribe success', s.startsWith('success'), s);
 s = await submit('test.user+demo@example.com', true);

@@ -31,7 +31,7 @@ if ( empty( $vendors ) ) {
 }
 ?>
 <section class="section section--vendors" aria-labelledby="vendors-title">
-	<div class="container container--wide">
+	<div class="container">
 		<h2 class="section-heading" id="vendors-title"><?php echo esc_html( $heading ); ?></h2>
 		<ul class="vendor-grid">
 			<?php foreach ( $vendors as $vendor ) : ?>

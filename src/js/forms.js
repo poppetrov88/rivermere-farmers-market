@@ -14,12 +14,34 @@ export function initForms() {
 		const status = form.querySelector('[data-newsletter-status]');
 		const button = form.querySelector('[data-newsletter-submit]');
 		const field = form.querySelector('.newsletter__field');
+		const consentError = form.querySelector('[data-consent-error]');
 		const label = button.querySelector('span');
 
 		const say = (message, state) => {
 			status.textContent = message;
 			status.dataset.state = state || '';
 		};
+
+		const setConsentInvalid = (invalid, message) => {
+			if (!consent) {
+				return;
+			}
+			consent.setAttribute('aria-invalid', String(invalid));
+			if (consentError) {
+				if (message) {
+					consentError.textContent = message;
+				}
+				if (invalid) {
+					// Re-inserting role=alert makes screen readers announce the message.
+					consentError.setAttribute('role', 'alert');
+				} else {
+					consentError.removeAttribute('role');
+				}
+				consentError.hidden = !invalid;
+			}
+		};
+
+		consent?.addEventListener('change', () => setConsentInvalid(false));
 
 		const setInvalid = (invalid) => {
 			email.setAttribute('aria-invalid', String(invalid));
@@ -32,6 +54,7 @@ export function initForms() {
 			event.preventDefault();
 			say('', '');
 			setInvalid(false);
+			setConsentInvalid(false);
 
 			if (!EMAIL_RE.test(email.value.trim())) {
 				setInvalid(true);
@@ -40,7 +63,7 @@ export function initForms() {
 				return;
 			}
 			if (consent && !consent.checked) {
-				say(data.i18n.consent, 'error');
+				setConsentInvalid(true, data.i18n.consent);
 				consent.focus();
 				return;
 			}
@@ -69,6 +92,10 @@ export function initForms() {
 				} else {
 					if (json.code === 'invalid_email') {
 						setInvalid(true);
+					}
+					if (json.code === 'no_consent') {
+						setConsentInvalid(true, json.message);
+						consent?.focus();
 					}
 					say(json.message || data.i18n.genericError, 'error');
 				}

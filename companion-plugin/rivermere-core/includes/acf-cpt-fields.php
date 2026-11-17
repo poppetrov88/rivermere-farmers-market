@@ -1,6 +1,7 @@
 <?php
 /**
- * ACF field groups for Vendors and Events (stored with the content, independent of the theme).
+ * ACF field groups for Vendors and Events. Source of truth: plugin /acf-json (Local JSON), imported
+ * into the database so they are editable under ACF → Field Groups. Independent of the theme.
  *
  * @package Rivermere_Core
  */
@@ -8,72 +9,63 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Register field groups.
+ * Load the plugin's Local JSON, and save edits of the plugin's groups back to it
+ * (the theme's groups keep saving to the theme's acf-json folder).
+ *
+ * @param array $paths Load paths.
+ * @return array
  */
-function rivermere_core_register_acf_groups() {
-	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
-		return;
-	}
+function rivermere_core_acf_load_json( $paths ) {
+	$paths[] = RIVERMERE_CORE_DIR . 'acf-json';
+	return $paths;
+}
+add_filter( 'acf/settings/load_json', 'rivermere_core_acf_load_json' );
 
-	$field = static function ( $type, $name, $label, $extra = array() ) {
-		return array_merge(
-			array(
-				'key'   => 'field_rmc_' . $name,
-				'label' => $label,
-				'name'  => $name,
-				'type'  => $type,
-			),
-			$extra
-		);
-	};
-
-	acf_add_local_field_group(
-		array(
-			'key'      => 'group_rmc_vendor',
-			'title'    => __( 'Vendor details', 'rivermere-core' ),
-			'fields'   => array(
-				$field( 'text', 'vendor_tagline', 'Short description', array( 'instructions' => 'One line shown on cards, e.g. "Fresh, seasonal produce".', 'maxlength' => 80, 'required' => 1 ) ),
-				$field( 'image', 'vendor_logo', 'Logo', array( 'return_format' => 'array', 'preview_size' => 'thumbnail', 'instructions' => 'Optional. The main photo is the Featured Image.' ) ),
-				$field( 'true_false', 'vendor_featured', 'Featured vendor', array( 'ui' => 1, 'instructions' => 'Show on the homepage "Featured Vendors" section.' ) ),
-				$field( 'text', 'vendor_stall', 'Stall / location at the market', array( 'wrapper' => array( 'width' => '50' ) ) ),
-				$field( 'checkbox', 'vendor_days', 'Attends on', array(
-					'choices' => array(
-						'Saturday' => 'Saturday',
-						'Sunday'   => 'Sunday',
-						'Weekdays' => 'Weekdays',
-					),
-					'layout'  => 'horizontal',
-					'wrapper' => array( 'width' => '50' ),
-				) ),
-				$field( 'url', 'vendor_website', 'Website', array( 'wrapper' => array( 'width' => '50' ) ) ),
-				$field( 'email', 'vendor_email', 'Contact email', array( 'wrapper' => array( 'width' => '50' ) ) ),
-				$field( 'text', 'vendor_phone', 'Phone', array( 'wrapper' => array( 'width' => '50' ) ) ),
-				$field( 'url', 'vendor_instagram', 'Instagram URL', array( 'wrapper' => array( 'width' => '50' ) ) ),
-				$field( 'url', 'vendor_facebook', 'Facebook URL', array( 'wrapper' => array( 'width' => '50' ) ) ),
-			),
-			'location' => array( array( array( 'param' => 'post_type', 'operator' => '==', 'value' => 'rm_vendor' ) ) ),
-			'position' => 'normal',
-		)
-	);
-
-	acf_add_local_field_group(
-		array(
-			'key'      => 'group_rmc_event',
-			'title'    => __( 'Event details', 'rivermere-core' ),
-			'fields'   => array(
-				$field( 'text', 'event_tagline', 'Short tagline', array( 'instructions' => 'e.g. "Local Food • Live Music • Family Activities".' ) ),
-				$field( 'date_time_picker', 'event_start', 'Starts', array( 'required' => 1, 'display_format' => 'd/m/Y g:i a', 'return_format' => 'Y-m-d H:i:s', 'first_day' => 1, 'wrapper' => array( 'width' => '50' ) ) ),
-				$field( 'date_time_picker', 'event_end', 'Ends', array( 'display_format' => 'd/m/Y g:i a', 'return_format' => 'Y-m-d H:i:s', 'first_day' => 1, 'wrapper' => array( 'width' => '50' ) ) ),
-				$field( 'text', 'event_location', 'Location' ),
-				$field( 'url', 'event_registration_url', 'Registration URL', array( 'instructions' => 'Optional.' ) ),
-				$field( 'true_false', 'event_featured', 'Featured event', array( 'ui' => 1 ) ),
-			),
-			'location' => array( array( array( 'param' => 'post_type', 'operator' => '==', 'value' => 'rm_event' ) ) ),
-			'position' => 'normal',
-		)
+/**
+ * Per-group save path.
+ */
+foreach ( array( 'group_rmc_vendor', 'group_rmc_event' ) as $rivermere_core_group_key ) {
+	add_filter(
+		'acf/settings/save_json/key=' . $rivermere_core_group_key,
+		static function () {
+			return RIVERMERE_CORE_DIR . 'acf-json';
+		}
 	);
 }
-add_action( 'acf/init', 'rivermere_core_register_acf_groups' );
+unset( $rivermere_core_group_key );
+
+/**
+ * Sync Local JSON into the database so groups show in ACF → Field Groups: imports missing groups
+ * and updates DB copies whose JSON file is newer (same as clicking "Sync" in the ACF UI).
+ *
+ * @return string[] Log.
+ */
+function rivermere_core_acf_sync() {
+	$log = array();
+	if ( ! function_exists( 'acf_get_local_json_files' ) ) {
+		return array( 'ACF Pro is not active.' );
+	}
+	foreach ( acf_get_local_json_files( 'acf-field-group' ) as $key => $file ) {
+		$json = json_decode( (string) file_get_contents( $file ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		if ( ! is_array( $json ) ) {
+			$log[] = "$key: invalid JSON";
+			continue;
+		}
+		$post = acf_get_field_group_post( $key );
+		if ( ! $post ) {
+			$json['ID'] = 0;
+			acf_import_field_group( $json );
+			$log[] = "$key imported";
+		} elseif ( ! empty( $json['modified'] ) && (int) $json['modified'] > strtotime( $post->post_modified_gmt . ' UTC' ) ) {
+			$json['ID'] = $post->ID;
+			acf_import_field_group( $json );
+			$log[] = "$key updated from JSON";
+		} else {
+			$log[] = "$key up to date";
+		}
+	}
+	return $log;
+}
 
 /**
  * Validate that an event does not end before it starts.

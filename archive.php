@@ -14,13 +14,17 @@ get_header();
 	<div class="container section">
 		<?php if ( have_posts() ) : ?>
 			<?php $rm_type = get_post_type(); ?>
-			<div class="<?php echo 'rm_vendor' === $rm_type ? 'vendor-grid' : 'card-grid'; ?>">
+			<div class="<?php echo 'rm_vendor' === $rm_type ? 'vendor-grid' : ( 'rm_event' === $rm_type ? 'event-grid' : 'card-grid' ); ?>">
 				<?php
 				while ( have_posts() ) :
 					the_post();
 					if ( 'rm_vendor' === $rm_type ) {
 						echo '<div>';
 						get_template_part( 'template-parts/components/vendor-card', null, array( 'post' => get_post() ) );
+						echo '</div>';
+					} elseif ( 'rm_event' === $rm_type ) {
+						echo '<div>';
+						get_template_part( 'template-parts/components/event-card', null, array( 'post' => get_post() ) );
 						echo '</div>';
 					} else {
 						get_template_part( 'template-parts/content/card' );

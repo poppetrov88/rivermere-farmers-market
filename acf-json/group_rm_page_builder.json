@@ -1,0 +1,902 @@
+{
+    "key": "group_rm_page_builder",
+    "title": "Page Builder",
+    "fields": [
+        {
+            "key": "field_rm_page_sections",
+            "label": "Page sections",
+            "name": "page_sections",
+            "aria-label": "",
+            "type": "flexible_content",
+            "instructions": "Add, drag to reorder, or duplicate sections. The newsletter band is configured in Theme Settings → Footer.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layouts": {
+                "layout_rm_hero": {
+                    "key": "layout_rm_hero",
+                    "name": "hero",
+                    "label": "Hero",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_rm_hero_eyebrow",
+                            "label": "Eyebrow text",
+                            "name": "eyebrow",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Small uppercase line above the heading. Separate phrases with \"•\".",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_rm_hero_heading",
+                            "label": "Heading",
+                            "name": "heading",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Main page heading (H1). Type \" | \" where you want a line break.",
+                            "required": 1,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_rm_hero_description",
+                            "label": "Description",
+                            "name": "description",
+                            "aria-label": "",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "rows": 3,
+                            "new_lines": "",
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_rm_hero_primary_cta",
+                            "label": "Primary button",
+                            "name": "primary_cta",
+                            "aria-label": "",
+                            "type": "link",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array"
+                        },
+                        {
+                            "key": "field_rm_hero_secondary_cta",
+                            "label": "Secondary button",
+                            "name": "secondary_cta",
+                            "aria-label": "",
+                            "type": "link",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array"
+                        },
+                        {
+                            "key": "field_rm_hero_image",
+                            "label": "Hero image",
+                            "name": "image",
+                            "aria-label": "",
+                            "type": "image",
+                            "instructions": "Landscape photo, at least 1200px wide. Appears on the right and is loaded eagerly (LCP).",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": 0,
+                            "min_height": 0,
+                            "min_size": 0,
+                            "max_width": 0,
+                            "max_height": 0,
+                            "max_size": 0,
+                            "mime_types": ""
+                        },
+                        {
+                            "key": "field_rm_hero_image_alt",
+                            "label": "Image alt text",
+                            "name": "image_alt",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Describe the photo. Leave blank only if it is purely decorative.",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_rm_hero_highlights",
+                            "label": "Highlights",
+                            "name": "highlights",
+                            "aria-label": "",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "layout": "table",
+                            "min": 0,
+                            "max": 4,
+                            "button_label": "Add highlight",
+                            "rows_per_page": 20,
+                            "collapsed": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_rm_hero_hl_icon",
+                                    "label": "Icon",
+                                    "name": "icon",
+                                    "aria-label": "",
+                                    "type": "select",
+                                    "instructions": "",
+                                    "required": false,
+                                    "conditional_logic": false,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "choices": {
+                                        "arrow": "Arrow",
+                                        "search": "Search",
+                                        "close": "Close",
+                                        "menu": "Menu",
+                                        "leaf": "Leaf",
+                                        "people": "People",
+                                        "heart": "Heart",
+                                        "apple": "Apple",
+                                        "croissant": "Croissant",
+                                        "cheese": "Cheese",
+                                        "plant": "Plant",
+                                        "basket": "Basket",
+                                        "music": "Music",
+                                        "calendar": "Calendar",
+                                        "pin": "Pin",
+                                        "clock": "Clock",
+                                        "mail": "Mail",
+                                        "phone": "Phone",
+                                        "facebook": "Facebook",
+                                        "instagram": "Instagram",
+                                        "x": "X",
+                                        "youtube": "Youtube",
+                                        "tiktok": "Tiktok",
+                                        "linkedin": "Linkedin",
+                                        "whatsapp": "Whatsapp",
+                                        "chevron": "Chevron",
+                                        "arrow-up": "Arrow-up",
+                                        "globe": "Globe",
+                                        "external": "External"
+                                    },
+                                    "allow_null": 0,
+                                    "return_format": "value",
+                                    "multiple": 0,
+                                    "default_value": false,
+                                    "ui": 0,
+                                    "ajax": 0,
+                                    "placeholder": "",
+                                    "create_options": 0,
+                                    "save_options": 0,
+                                    "parent_repeater": "field_rm_hero_highlights"
+                                },
+                                {
+                                    "key": "field_rm_hero_hl_label",
+                                    "label": "Label",
+                                    "name": "label",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": false,
+                                    "conditional_logic": false,
+                                    "wrapper": {
+                                        "width": "70",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "parent_repeater": "field_rm_hero_highlights"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_rm_categories": {
+                    "key": "layout_rm_categories",
+                    "name": "product_categories",
+                    "label": "Product Categories",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_rm_cats_heading",
+                            "label": "Heading",
+                            "name": "heading",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "Explore What’s at the Market",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_rm_cats_categories",
+                            "label": "Categories to show",
+                            "name": "categories",
+                            "aria-label": "",
+                            "type": "taxonomy",
+                            "instructions": "Pick and order the categories. Manage them (and their icons) under Vendors → Product Categories. Leave empty to show all.",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "taxonomy": "rm_product_category",
+                            "field_type": "multi_select",
+                            "return_format": "object",
+                            "add_term": 0,
+                            "multiple": 0,
+                            "allow_null": 0,
+                            "load_terms": 0,
+                            "save_terms": 0,
+                            "bidirectional_target": []
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_rm_image_text": {
+                    "key": "layout_rm_image_text",
+                    "name": "image_text",
+                    "label": "Image and Text",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_rm_imgtxt_eyebrow",
+                            "label": "Eyebrow text",
+                            "name": "eyebrow",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_rm_imgtxt_heading",
+                            "label": "Heading",
+                            "name": "heading",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_rm_imgtxt_text",
+                            "label": "Text",
+                            "name": "text",
+                            "aria-label": "",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "rows": 3,
+                            "new_lines": "",
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_rm_imgtxt_details",
+                            "label": "Detail list",
+                            "name": "details",
+                            "aria-label": "",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "layout": "table",
+                            "max": 6,
+                            "button_label": "Add detail",
+                            "min": 0,
+                            "rows_per_page": 20,
+                            "collapsed": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_rm_imgtxt_d_icon",
+                                    "label": "Icon",
+                                    "name": "icon",
+                                    "aria-label": "",
+                                    "type": "select",
+                                    "instructions": "",
+                                    "required": false,
+                                    "conditional_logic": false,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "choices": {
+                                        "arrow": "Arrow",
+                                        "search": "Search",
+                                        "close": "Close",
+                                        "menu": "Menu",
+                                        "leaf": "Leaf",
+                                        "people": "People",
+                                        "heart": "Heart",
+                                        "apple": "Apple",
+                                        "croissant": "Croissant",
+                                        "cheese": "Cheese",
+                                        "plant": "Plant",
+                                        "basket": "Basket",
+                                        "music": "Music",
+                                        "calendar": "Calendar",
+                                        "pin": "Pin",
+                                        "clock": "Clock",
+                                        "mail": "Mail",
+                                        "phone": "Phone",
+                                        "facebook": "Facebook",
+                                        "instagram": "Instagram",
+                                        "x": "X",
+                                        "youtube": "Youtube",
+                                        "tiktok": "Tiktok",
+                                        "linkedin": "Linkedin",
+                                        "whatsapp": "Whatsapp",
+                                        "chevron": "Chevron",
+                                        "arrow-up": "Arrow-up",
+                                        "globe": "Globe",
+                                        "external": "External"
+                                    },
+                                    "allow_null": 0,
+                                    "return_format": "value",
+                                    "multiple": 0,
+                                    "default_value": false,
+                                    "ui": 0,
+                                    "ajax": 0,
+                                    "placeholder": "",
+                                    "create_options": 0,
+                                    "save_options": 0,
+                                    "parent_repeater": "field_rm_imgtxt_details"
+                                },
+                                {
+                                    "key": "field_rm_imgtxt_d_text",
+                                    "label": "Text",
+                                    "name": "text",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": false,
+                                    "conditional_logic": false,
+                                    "wrapper": {
+                                        "width": "70",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "parent_repeater": "field_rm_imgtxt_details"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_rm_imgtxt_cta",
+                            "label": "Button",
+                            "name": "cta",
+                            "aria-label": "",
+                            "type": "link",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array"
+                        },
+                        {
+                            "key": "field_rm_imgtxt_image",
+                            "label": "Image",
+                            "name": "image",
+                            "aria-label": "",
+                            "type": "image",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": 0,
+                            "min_height": 0,
+                            "min_size": 0,
+                            "max_width": 0,
+                            "max_height": 0,
+                            "max_size": 0,
+                            "mime_types": ""
+                        },
+                        {
+                            "key": "field_rm_imgtxt_image_alt",
+                            "label": "Image alt text",
+                            "name": "image_alt",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_rm_imgtxt_image_position",
+                            "label": "Image position",
+                            "name": "image_position",
+                            "aria-label": "",
+                            "type": "button_group",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "left": "Left",
+                                "right": "Right"
+                            },
+                            "default_value": "left",
+                            "allow_null": 0,
+                            "return_format": "value",
+                            "layout": "horizontal"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_rm_event_banner": {
+                    "key": "layout_rm_event_banner",
+                    "name": "event_banner",
+                    "label": "Upcoming Event Banner",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_rm_evb_label",
+                            "label": "Label",
+                            "name": "label",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "Upcoming Event",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_rm_evb_source",
+                            "label": "Event source",
+                            "name": "source",
+                            "aria-label": "",
+                            "type": "button_group",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "next": "Next upcoming event (automatic)",
+                                "manual": "Choose an event"
+                            },
+                            "default_value": "next",
+                            "allow_null": 0,
+                            "return_format": "value",
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_rm_evb_event",
+                            "label": "Event",
+                            "name": "event",
+                            "aria-label": "",
+                            "type": "post_object",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_rm_evb_source",
+                                        "operator": "==",
+                                        "value": "manual"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "rm_event"
+                            ],
+                            "return_format": "id",
+                            "ui": 1,
+                            "taxonomy": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "bidirectional_target": []
+                        },
+                        {
+                            "key": "field_rm_evb_button_label",
+                            "label": "Button label",
+                            "name": "button_label",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "Event Details",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_rm_vendors": {
+                    "key": "layout_rm_vendors",
+                    "name": "featured_vendors",
+                    "label": "Featured Vendors",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_rm_vend_heading",
+                            "label": "Heading",
+                            "name": "heading",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "Meet Our Featured Vendors",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_rm_vend_source",
+                            "label": "Vendor source",
+                            "name": "source",
+                            "aria-label": "",
+                            "type": "button_group",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "featured": "Vendors marked \"Featured\"",
+                                "manual": "Choose vendors"
+                            },
+                            "default_value": "featured",
+                            "allow_null": 0,
+                            "return_format": "value",
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_rm_vend_vendors",
+                            "label": "Vendors",
+                            "name": "vendors",
+                            "aria-label": "",
+                            "type": "relationship",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_rm_vend_source",
+                                        "operator": "==",
+                                        "value": "manual"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "rm_vendor"
+                            ],
+                            "return_format": "id",
+                            "max": 8,
+                            "taxonomy": [],
+                            "min": 0,
+                            "filters": [
+                                "search",
+                                "post_type",
+                                "taxonomy"
+                            ],
+                            "elements": [],
+                            "bidirectional_target": []
+                        },
+                        {
+                            "key": "field_rm_vend_count",
+                            "label": "Number of vendors",
+                            "name": "count",
+                            "aria-label": "",
+                            "type": "number",
+                            "instructions": "Used for the automatic \"Featured\" source.",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 4,
+                            "min": 1,
+                            "max": 8,
+                            "step": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_rm_vend_all_link",
+                            "label": "Optional \"All vendors\" link",
+                            "name": "all_link",
+                            "aria-label": "",
+                            "type": "link",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_rm_cta": {
+                    "key": "layout_rm_cta",
+                    "name": "cta",
+                    "label": "Call to Action",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_rm_cta_heading",
+                            "label": "Heading",
+                            "name": "heading",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_rm_cta_text",
+                            "label": "Text",
+                            "name": "text",
+                            "aria-label": "",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "rows": 2,
+                            "new_lines": "",
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_rm_cta_link",
+                            "label": "Button",
+                            "name": "link",
+                            "aria-label": "",
+                            "type": "link",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": false,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "button_label": "Add section",
+            "min": "",
+            "max": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1794950195
+}

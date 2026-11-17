@@ -1,0 +1,1165 @@
+{
+    "key": "group_rm_theme_settings",
+    "title": "Theme Settings",
+    "fields": [
+        {
+            "key": "field_rm_tab_general",
+            "label": "General",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_rm_opt_site_logo",
+            "label": "Site logo",
+            "name": "site_logo",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Used in the header. If empty, the WordPress Customizer logo, then a built-in logo, is used. Tip: set the browser Site Icon (favicon) under Appearance → Customize → Site Identity.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
+        },
+        {
+            "key": "field_rm_opt_alt_logo",
+            "label": "Alternate logo (light version)",
+            "name": "alt_logo",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Optional version for dark backgrounds, used in the footer.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
+        },
+        {
+            "key": "field_rm_opt_market_name",
+            "label": "Market name",
+            "name": "market_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Defaults to the Site Title.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_opt_contact_email",
+            "label": "Contact email",
+            "name": "contact_email",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_opt_phone",
+            "label": "Phone number",
+            "name": "phone",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_opt_address",
+            "label": "Address",
+            "name": "address",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Street, town, postcode — one line each.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "new_lines": "br",
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rm_opt_maps_url",
+            "label": "Google Maps \/ directions URL",
+            "name": "maps_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rm_opt_market_days",
+            "label": "Market days (short)",
+            "name": "market_days",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. \"Every Sunday, 9 AM – 1 PM\". Shown in highlights and the footer.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_opt_opening_hours",
+            "label": "Opening hours",
+            "name": "opening_hours",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Used in the footer and for structured data.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "button_label": "Add hours",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_rm_opt_oh_days",
+                    "label": "Days",
+                    "name": "days",
+                    "aria-label": "",
+                    "type": "checkbox",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "Monday": "Mon",
+                        "Tuesday": "Tue",
+                        "Wednesday": "Wed",
+                        "Thursday": "Thu",
+                        "Friday": "Fri",
+                        "Saturday": "Sat",
+                        "Sunday": "Sun"
+                    },
+                    "layout": "horizontal",
+                    "default_value": [],
+                    "allow_custom": 0,
+                    "save_custom": 0,
+                    "toggle": 0,
+                    "return_format": "value",
+                    "custom_choice_button_text": "Add new choice",
+                    "parent_repeater": "field_rm_opt_opening_hours"
+                },
+                {
+                    "key": "field_rm_opt_oh_opens",
+                    "label": "Opens",
+                    "name": "opens",
+                    "aria-label": "",
+                    "type": "time_picker",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "display_format": "H:i",
+                    "return_format": "H:i",
+                    "parent_repeater": "field_rm_opt_opening_hours"
+                },
+                {
+                    "key": "field_rm_opt_oh_closes",
+                    "label": "Closes",
+                    "name": "closes",
+                    "aria-label": "",
+                    "type": "time_picker",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "display_format": "H:i",
+                    "return_format": "H:i",
+                    "parent_repeater": "field_rm_opt_opening_hours"
+                }
+            ]
+        },
+        {
+            "key": "field_rm_opt_whatsapp_number",
+            "label": "WhatsApp number",
+            "name": "whatsapp_number",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "International format, e.g. +44 7700 900123. Used for the wa.me link. Leave empty to hide WhatsApp.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_opt_facebook_url",
+            "label": "Facebook URL",
+            "name": "facebook_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Leave empty until the profile exists; the icon then shows a “Coming soon” message.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rm_opt_instagram_url",
+            "label": "Instagram URL",
+            "name": "instagram_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rm_opt_linkedin_url",
+            "label": "LinkedIn URL",
+            "name": "linkedin_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "34",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rm_tab_header",
+            "label": "Header",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_rm_opt_header_cta_show",
+            "label": "Show header button",
+            "name": "header_cta_show",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_header_cta",
+            "label": "Header button",
+            "name": "header_cta",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "e.g. \"Become a Vendor\". Leave empty to hide.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_rm_opt_header_social",
+            "label": "Show social icons (utility bar)",
+            "name": "header_social",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_header_language",
+            "label": "Show language selector (UI only)",
+            "name": "header_language",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_header_sticky",
+            "label": "Sticky header",
+            "name": "header_sticky",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_header_search",
+            "label": "Show search button",
+            "name": "header_search",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_announcement_enabled",
+            "label": "Show announcement bar",
+            "name": "announcement_enabled",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 0,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_announcement_text",
+            "label": "Announcement text",
+            "name": "announcement_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_rm_opt_announcement_enabled",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_opt_announcement_link",
+            "label": "Announcement link",
+            "name": "announcement_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_rm_opt_announcement_enabled",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_rm_tab_footer",
+            "label": "Footer",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_rm_opt_footer_description",
+            "label": "Footer description",
+            "name": "footer_description",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "new_lines": "",
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rm_opt_footer_cta",
+            "label": "Footer button",
+            "name": "footer_cta",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_rm_opt_newsletter_enabled",
+            "label": "Show newsletter band",
+            "name": "newsletter_enabled",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_newsletter_heading",
+            "label": "Newsletter heading",
+            "name": "newsletter_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Stay in the Loop",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_opt_newsletter_description",
+            "label": "Newsletter description",
+            "name": "newsletter_description",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 2,
+            "new_lines": "",
+            "default_value": "Get market updates, special events, and seasonal highlights delivered to your inbox.",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rm_opt_newsletter_consent",
+            "label": "Newsletter consent text",
+            "name": "newsletter_consent",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Shown beside the consent checkbox. {market} is replaced by the market name.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "I agree to receive email updates from {market}. I can unsubscribe at any time.",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_opt_privacy_page",
+            "label": "Privacy policy page",
+            "name": "privacy_page",
+            "aria-label": "",
+            "type": "page_link",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "allow_null": 1,
+            "taxonomy": [],
+            "multiple": 0,
+            "allow_archives": 1
+        },
+        {
+            "key": "field_rm_opt_cookie_policy_page",
+            "label": "Cookie policy page",
+            "name": "cookie_policy_page",
+            "aria-label": "",
+            "type": "page_link",
+            "instructions": "Linked from the cookie banner.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "allow_archives": 1,
+            "multiple": 0,
+            "allow_null": 1
+        },
+        {
+            "key": "field_rm_opt_copyright_text",
+            "label": "Copyright text",
+            "name": "copyright_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Use {year} for the current year. Defaults to \"© {year} Site title\".",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_tab_floating",
+            "label": "Floating Contact",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_rm_opt_floating_note",
+            "label": "About",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Uses the telephone, email and WhatsApp numbers from the General tab. A method is hidden automatically when its detail is empty.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_rm_opt_floating_enabled",
+            "label": "Enable floating contact widget",
+            "name": "floating_enabled",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_floating_phone",
+            "label": "Show telephone",
+            "name": "floating_phone",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_floating_email",
+            "label": "Show email",
+            "name": "floating_email",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_floating_whatsapp",
+            "label": "Show WhatsApp",
+            "name": "floating_whatsapp",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "34",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_floating_variant",
+            "label": "Colour variant",
+            "name": "floating_variant",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "green": "Green",
+                "yellow": "Yellow",
+                "dark": "Dark"
+            },
+            "default_value": "green",
+            "allow_null": 0,
+            "return_format": "value",
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_rm_opt_floating_position",
+            "label": "Vertical position",
+            "name": "floating_position",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "middle": "Middle",
+                "bottom": "Lower"
+            },
+            "default_value": "middle",
+            "allow_null": 0,
+            "return_format": "value",
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_rm_tab_ui",
+            "label": "UI Features",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_rm_opt_ui_scrollbar",
+            "label": "Enable custom green scrollbar",
+            "name": "ui_scrollbar",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_ui_progress",
+            "label": "Enable scroll progress bar",
+            "name": "ui_progress",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_ui_back_to_top",
+            "label": "Enable footer back-to-top button",
+            "name": "ui_back_to_top",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_ui_console",
+            "label": "Enable browser console welcome message",
+            "name": "ui_console",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_opt_ui_cookie_banner",
+            "label": "Enable cookie consent banner",
+            "name": "ui_cookie_banner",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Shows the consent banner and the footer \"Cookie settings\" link. Keep on unless you use another consent tool.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_tab_appearance",
+            "label": "Appearance",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_rm_opt_color_primary",
+            "label": "Primary (deep green)",
+            "name": "color_primary",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#053120",
+            "enable_opacity": 0,
+            "return_format": "string",
+            "custom_palette_source": "",
+            "palette_colors": "",
+            "show_color_wheel": true
+        },
+        {
+            "key": "field_rm_opt_color_secondary",
+            "label": "Secondary (action green)",
+            "name": "color_secondary",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#1d6806",
+            "enable_opacity": 0,
+            "return_format": "string",
+            "custom_palette_source": "",
+            "palette_colors": "",
+            "show_color_wheel": true
+        },
+        {
+            "key": "field_rm_opt_color_accent",
+            "label": "Accent (yellow)",
+            "name": "color_accent",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "34",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#fdd13f",
+            "enable_opacity": 0,
+            "return_format": "string",
+            "custom_palette_source": "",
+            "palette_colors": "",
+            "show_color_wheel": true
+        },
+        {
+            "key": "field_rm_opt_button_style",
+            "label": "Button style",
+            "name": "button_style",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "pill": "Pill",
+                "rounded": "Rounded",
+                "square": "Square"
+            },
+            "default_value": "pill",
+            "allow_null": 0,
+            "return_format": "value",
+            "layout": "horizontal"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "rivermere-theme-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "",
+    "show_in_rest": false,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1794949596
+}

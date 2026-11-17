@@ -14,8 +14,6 @@ $phone     = rivermere_option( 'phone', '' );
 $address   = rivermere_option( 'address', '' );
 $maps      = rivermere_option( 'maps_url', '' );
 $days      = rivermere_option( 'market_days', '' );
-$privacy   = get_privacy_policy_url();
-$privacy   = $privacy ? $privacy : rivermere_option( 'privacy_page', '' );
 ?>
 <div class="footer-main">
 	<div class="container footer-main__grid">
@@ -65,14 +63,24 @@ $privacy   = $privacy ? $privacy : rivermere_option( 'privacy_page', '' );
 	<div class="container footer-bottom__inner">
 		<p><?php echo esc_html( rivermere_copyright() ); ?></p>
 		<?php get_template_part( 'template-parts/components/back-to-top' ); ?>
-		<nav aria-label="<?php esc_attr_e( 'Legal', 'rivermere-market' ); ?>">
+		<nav class="footer-legal" aria-label="<?php esc_attr_e( 'Legal', 'rivermere-market' ); ?>">
 			<?php
 			if ( has_nav_menu( 'legal' ) ) {
 				rivermere_menu( 'legal', array( 'depth' => 1, 'fallback_cb' => false ) );
-			} elseif ( $privacy ) {
-				echo '<ul class="menu"><li><a href="' . esc_url( $privacy ) . '">' . esc_html__( 'Privacy policy', 'rivermere-market' ) . '</a></li></ul>';
+			} else {
+				echo '<ul class="menu">';
+				foreach ( array( 'privacy-policy', 'terms-and-conditions', 'cookie-policy' ) as $rm_slug ) {
+					$rm_page = get_page_by_path( $rm_slug );
+					if ( $rm_page && 'publish' === $rm_page->post_status ) {
+						echo '<li><a href="' . esc_url( get_permalink( $rm_page ) ) . '">' . esc_html( get_the_title( $rm_page ) ) . '</a></li>';
+					}
+				}
+				echo '</ul>';
 			}
 			?>
 		</nav>
+		<?php if ( rivermere_toggle( 'ui_cookie_banner', true ) ) : ?>
+			<button type="button" class="footer-cookie-settings" data-cookie-open aria-haspopup="dialog"><?php esc_html_e( 'Cookie settings', 'rivermere-market' ); ?></button>
+		<?php endif; ?>
 	</div>
 </div>

@@ -1,0 +1,113 @@
+@use '../abstracts/mixins' as m;
+
+// ---------- Banner ----------
+.cookie-banner {
+  position: fixed;
+  z-index: 1100;
+  bottom: var(--sp-4);
+  left: 50%;
+  display: grid;
+  gap: var(--sp-4);
+  width: min(760px, calc(100vw - 2 * var(--sp-4)));
+  padding: var(--sp-5);
+  background: var(--c-surface-alt);
+  border: 1px solid var(--c-leaf-200);
+  border-top: 4px solid var(--c-secondary-600);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(-50%);
+
+  &[hidden] { display: none; }
+
+  &__title { margin-bottom: var(--sp-1); font-size: 1.0625rem; }
+  &__text p { font-size: .9375rem; line-height: 1.5; }
+  &__text a { color: var(--c-secondary-600); font-weight: var(--fw-bold); }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+
+    .btn { flex: 1 1 auto; }
+  }
+
+  @include m.up(md) {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--sp-5);
+
+    &__actions { flex-flow: column nowrap; min-width: 190px; }
+  }
+
+  // Equal-weight choices: same size and contrast for accept and reject.
+  .btn--outline { border-width: 2px; }
+}
+
+// ---------- Settings dialog ----------
+.cookie-dialog {
+  width: min(560px, calc(100vw - 2 * var(--sp-4)));
+  max-height: calc(100vh - 2 * var(--sp-4));
+  padding: 0;
+  background: var(--c-surface-alt);
+  border: 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  color: var(--c-text);
+  overflow: auto;
+
+  &::backdrop { background: rgb(5 49 32 / 70%); }
+
+  &__form { padding: var(--sp-6); }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-3);
+  }
+
+  &__intro { margin-bottom: var(--sp-4); color: var(--c-text-soft); }
+
+  &__fieldset { display: grid; gap: var(--sp-3); margin: 0; padding: 0; border: 0; }
+
+  &__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-5); }
+}
+
+.cookie-option {
+  position: relative;
+  padding: var(--sp-3) var(--sp-4);
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  &__desc { padding-left: calc(24px + var(--sp-3)); color: var(--c-text-soft); font-size: .875rem; }
+  .check__input { left: var(--sp-4); }
+}
+
+// Light variant of the custom checkbox (on white surfaces).
+.check--light {
+  color: var(--c-text);
+
+  .check__box { background: #fff; border-color: var(--c-secondary-600); }
+  &:hover .check__box { background: var(--c-leaf-100); border-color: var(--c-secondary-700); }
+}
+
+.check__input:checked + .check--light .check__box { background: var(--c-secondary-600); border-color: var(--c-secondary-600); }
+.check__input:disabled + .check--light { cursor: not-allowed; }
+.check__input:disabled + .check--light .check__box { opacity: .75; }
+.check__input:focus-visible + .check--light .check__box { box-shadow: 0 0 0 3px var(--c-focus); }
+
+// ---------- Footer link ----------
+.footer-cookie-settings {
+  padding: var(--sp-2) 0;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-size: inherit;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  cursor: pointer;
+
+  &:hover { color: var(--c-accent-400); }
+}

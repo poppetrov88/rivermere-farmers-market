@@ -152,16 +152,9 @@ function rivermere_seo_page() {
 				?>
 			</table>
 			<h2><?php esc_html_e( 'Analytics', 'rivermere-core' ); ?></h2>
-			<p class="description"><?php esc_html_e( 'Prefer Google Site Kit if you already use it, and do not enable both. Nothing loads unless a valid ID is entered.', 'rivermere-core' ); ?></p>
+			<p class="description"><?php esc_html_e( 'Prefer Google Site Kit if you already use it, and do not enable both. Nothing loads unless a valid ID is entered, and the tag loads only after the visitor accepts analytics cookies in the cookie banner.', 'rivermere-core' ); ?></p>
 			<table class="form-table" role="presentation">
 				<?php $row( 'ga4_id', __( 'GA4 measurement ID', 'rivermere-core' ), 'text', __( 'Format G-XXXXXXXXXX.', 'rivermere-core' ), 'placeholder="G-XXXXXXXXXX"' ); ?>
-				<tr>
-					<th scope="row"><?php esc_html_e( 'Consent', 'rivermere-core' ); ?></th>
-					<td>
-						<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[ga4_consent]" value="1" <?php checked( $o['ga4_consent'], '1' ); ?>> <?php esc_html_e( 'Only load analytics after consent (cookie rm_consent=analytics)', 'rivermere-core' ); ?></label>
-						<p class="description"><?php esc_html_e( 'Your cookie banner must set the cookie rm_consent=analytics, or return true from the rivermere_analytics_consent filter.', 'rivermere-core' ); ?></p>
-					</td>
-				</tr>
 			</table>
 			<?php submit_button(); ?>
 		</form>
@@ -307,6 +300,11 @@ function rivermere_seo_event_entity( $post, $o, $data ) {
 		return $d ? $d->format( 'c' ) : '';
 	};
 	$loc_name = get_post_meta( $post->ID, 'event_location', true );
+	$status   = get_post_meta( $post->ID, 'event_status', true );
+	$map      = array(
+		'cancelled' => 'https://schema.org/EventCancelled',
+		'postponed' => 'https://schema.org/EventPostponed',
+	);
 	$event    = array(
 		'@type'               => 'Event',
 		'@id'                 => get_permalink( $post ) . '#event',
@@ -314,27 +312,37 @@ function rivermere_seo_event_entity( $post, $o, $data ) {
 		'url'                 => get_permalink( $post ),
 		'startDate'           => $to_iso( $start ),
 		'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
-		'eventStatus'         => 'https://schema.org/EventScheduled',
+		'eventStatus'         => isset( $map[ $status ] ) ? $map[ $status ] : 'https://schema.org/EventScheduled',
 	);
 	$end = get_post_meta( $post->ID, 'event_end', true );
 	if ( $end ) {
 		$event['endDate'] = $to_iso( $end );
 	}
-	$desc = has_excerpt( $post ) ? get_the_excerpt( $post ) : wp_trim_words( wp_strip_all_tags( $post->post_content ), 40 );
+	$intro = get_post_meta( $post->ID, 'event_intro', true );
+	$desc  = $intro ? $intro : ( has_excerpt( $post ) ? get_the_excerpt( $post ) : wp_trim_words( wp_strip_all_tags( $post->post_content ), 40 ) );
 	if ( $desc ) {
 		$event['description'] = $desc;
 	}
-	if ( has_post_thumbnail( $post ) ) {
-		$event['image'] = get_the_post_thumbnail_url( $post, 'large' );
+	$hero_id = (int) get_post_meta( $post->ID, 'event_hero_image', true );
+	$img_url = $hero_id ? wp_get_attachment_image_url( $hero_id, 'large' ) : ( has_post_thumbnail( $post ) ? get_the_post_thumbnail_url( $post, 'large' ) : '' );
+	if ( $img_url ) {
+		$event['image'] = $img_url;
 	}
-	if ( $loc_name ) {
-		$place = array( '@type' => 'Place', 'name' => $loc_name );
-		if ( $o['street'] && $o['locality'] ) {
+	$address_text = trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( str_replace( array( '<br />', '<br>', "\n" ), ', ', (string) get_post_meta( $post->ID, 'event_address', true ) ) ) ) );
+	if ( $loc_name || $address_text ) {
+		$place = array( '@type' => 'Place', 'name' => $loc_name ? $loc_name : $address_text );
+		if ( $address_text ) {
+			// Free-text address from the event; structured only when the market identity matches.
+			$place['address'] = $address_text;
+		} elseif ( $o['street'] && $o['locality'] ) {
 			$place['address'] = array_filter( array( '@type' => 'PostalAddress', 'streetAddress' => $o['street'], 'addressLocality' => $o['locality'], 'addressRegion' => $o['region'], 'postalCode' => $o['postal'], 'addressCountry' => $o['country'] ) );
 		}
 		$event['location'] = $place;
 	}
-	if ( isset( $data['publisher']['@id'] ) ) {
+	$organizer = get_post_meta( $post->ID, 'event_organizer', true );
+	if ( $organizer ) {
+		$event['organizer'] = array( '@type' => 'Organization', 'name' => $organizer, 'url' => home_url( '/' ) );
+	} elseif ( isset( $data['publisher']['@id'] ) ) {
 		$event['organizer'] = array( '@id' => $data['publisher']['@id'] );
 	}
 	$reg = get_post_meta( $post->ID, 'event_registration_url', true );
@@ -359,25 +367,23 @@ add_action( 'rank_math/opengraph/facebook/add_additional_images', 'rivermere_seo
 add_action( 'rank_math/opengraph/twitter/add_additional_images', 'rivermere_seo_default_image' );
 
 /**
- * GA4 (only when configured, once, and with consent unless disabled).
+ * GA4 configuration handed to the theme's consent manager (assets/js/main.min.js).
+ *
+ * Nothing is printed or loaded here: the Google tag is injected client-side ONLY after the visitor
+ * grants analytics consent (cookie banner), and is skipped for editors and when Site Kit is active.
+ * Without a valid measurement ID nothing at all is output.
  */
 function rivermere_seo_analytics() {
 	$o = rivermere_seo_settings();
-	if ( ! $o['ga4_id'] || is_admin() || is_user_logged_in() && current_user_can( 'edit_posts' ) ) {
+	if ( ! $o['ga4_id'] || ! wp_script_is( 'rivermere-main', 'enqueued' ) ) {
 		return;
 	}
-	// Do not double-load if Site Kit already outputs a gtag for this property.
+	if ( is_user_logged_in() && current_user_can( 'edit_posts' ) ) {
+		return;
+	}
 	if ( defined( 'GOOGLESITEKIT_VERSION' ) && apply_filters( 'rivermere_analytics_skip_when_sitekit', true ) ) {
 		return;
 	}
-	$id = esc_js( $o['ga4_id'] );
-	if ( '1' === $o['ga4_consent'] ) {
-		$consented = isset( $_COOKIE['rm_consent'] ) && 'analytics' === sanitize_text_field( wp_unslash( $_COOKIE['rm_consent'] ) );
-		if ( ! apply_filters( 'rivermere_analytics_consent', $consented ) ) {
-			return;
-		}
-	}
-	printf( '<script async src="https://www.googletagmanager.com/gtag/js?id=%s"></script>' . "\n", esc_attr( rawurlencode( $o['ga4_id'] ) ) );
-	echo "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','" . $id . "');</script>\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- ID validated by regex and escaped.
+	wp_add_inline_script( 'rivermere-main', 'window.rivermereAnalytics=' . wp_json_encode( array( 'id' => $o['ga4_id'] ) ) . ';', 'before' );
 }
-add_action( 'wp_head', 'rivermere_seo_analytics', 20 );
+add_action( 'wp_enqueue_scripts', 'rivermere_seo_analytics', 30 );

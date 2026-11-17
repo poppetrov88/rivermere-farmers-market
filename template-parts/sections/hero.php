@@ -27,8 +27,7 @@ $is_first   = rivermere_is_first_section();
 				false,
 				array(
 					'class'         => 'hero__img',
-					'alt'           => $alt,
-					'loading'       => $is_first ? 'eager' : 'lazy',
+										'loading'       => $is_first ? 'eager' : 'lazy',
 					'fetchpriority' => $is_first ? 'high' : 'auto',
 					'decoding'      => 'async',
 					'sizes'         => '(min-width: 1024px) 56vw, 100vw',

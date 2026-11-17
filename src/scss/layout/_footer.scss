@@ -65,15 +65,17 @@
   &__field-icon { width: 20px; height: 20px; color: #5a655e; }
 
   &__consent {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--sp-3);
-    margin-top: var(--sp-3);
-    font-size: .8125rem;
-    line-height: 1.4;
+    position: relative;
+    margin-top: var(--sp-2);
+  }
 
-    input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--c-accent-400); }
-    a { color: var(--c-accent-400); }
+  &__error {
+    margin-top: var(--sp-1);
+    color: #ffb4ab;
+    font-size: .875rem;
+    font-weight: var(--fw-bold);
+
+    &[hidden] { display: none; }
   }
 
   &__status {
@@ -148,4 +150,73 @@
   &__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-3); }
   .menu { display: flex; gap: var(--sp-5); }
   a { color: #fff; }
+}
+
+// ---------- Custom checkbox (native input + styled label) ----------
+.check__input {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  min-height: 44px;
+  padding-block: var(--sp-2);
+  cursor: pointer;
+  font-size: .875rem;
+  line-height: 1.45;
+
+  &__box {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    background: rgb(255 255 255 / 10%);
+    border: 2px solid rgb(255 255 255 / 75%);
+    border-radius: 7px;
+    transition: background-color var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
+  }
+
+  &__tick {
+    width: 16px;
+    height: 16px;
+    stroke: #fff;
+    stroke-width: 3.4;
+    stroke-dasharray: 22;
+    stroke-dashoffset: 22;
+    transition: stroke-dashoffset .28s var(--ease) .04s;
+  }
+
+  &:hover &__box { background: rgb(255 255 255 / 22%); border-color: var(--c-accent-400); }
+
+  a { color: var(--c-accent-400); font-weight: var(--fw-bold); }
+}
+
+.check__input:checked + .check .check__box {
+  background: var(--c-secondary-600);
+  border-color: #fff;
+}
+
+.check__input:checked + .check .check__tick { stroke-dashoffset: 0; }
+
+.check__input:focus-visible + .check .check__box { box-shadow: 0 0 0 3px var(--c-accent-400); }
+
+.check__input[aria-invalid='true'] + .check .check__box { border-color: #ff8c82; box-shadow: 0 0 0 3px rgb(255 140 130 / 35%); }
+
+.footer-bottom .footer-bottom__inner {
+  column-gap: var(--sp-5);
+
+  > p { order: 1; }
+  .footer-legal { order: 2; }
+  .footer-cookie-settings { order: 3; }
+  .back-to-top { order: 4; margin-left: auto; }
 }

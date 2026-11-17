@@ -117,16 +117,18 @@ function rivermere_heading_html( $text ) {
 /**
  * Next upcoming (or ongoing) event.
  *
- * @param int $limit Number of events.
+ * @param int $limit   Number of events.
+ * @param int $exclude Event ID to exclude.
  * @return WP_Post[]
  */
-function rivermere_get_upcoming_events( $limit = 1 ) {
+function rivermere_get_upcoming_events( $limit = 1, $exclude = 0 ) {
 	$now = current_time( 'Y-m-d H:i:s' );
 	return get_posts(
 		array(
 			'post_type'      => 'rm_event',
 			'posts_per_page' => $limit,
 			'post_status'    => 'publish',
+			'post__not_in'   => $exclude ? array( (int) $exclude ) : array(),
 			'meta_key'       => 'event_start', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 			'orderby'        => 'meta_value',
 			'order'          => 'ASC',
@@ -246,4 +248,55 @@ function rivermere_pagination() {
 function rivermere_single_eyebrow() {
 	$type = get_post_type_object( get_post_type() );
 	return ( $type && 'post' !== $type->name ) ? $type->labels->singular_name : get_the_date();
+}
+
+/**
+ * All event fields for the single event template, with safe defaults.
+ *
+ * @param int $id Event ID.
+ * @return array
+ */
+function rivermere_event_data( $id ) {
+	$times = rivermere_event_times( $id );
+	$data  = array(
+		'times'         => $times,
+		'label'         => (string) rivermere_field( 'event_label', $id, '' ),
+		'status'        => (string) rivermere_field( 'event_status', $id, 'scheduled' ),
+		'tagline'       => (string) rivermere_field( 'event_tagline', $id, '' ),
+		'intro'         => (string) rivermere_field( 'event_intro', $id, '' ),
+		'hero'          => rivermere_field( 'event_hero_image', $id, array() ),
+		'location'      => (string) rivermere_field( 'event_location', $id, '' ),
+		'address'       => (string) rivermere_field( 'event_address', $id, '' ),
+		'directions'    => (string) rivermere_field( 'event_directions_url', $id, '' ),
+		'admission'     => (string) rivermere_field( 'event_admission', $id, '' ),
+		'organizer'     => (string) rivermere_field( 'event_organizer', $id, '' ),
+		'email'         => (string) rivermere_field( 'event_contact_email', $id, '' ),
+		'phone'         => (string) rivermere_field( 'event_contact_phone', $id, '' ),
+		'registration'  => (string) rivermere_field( 'event_registration_url', $id, '' ),
+		'accessibility' => (string) rivermere_field( 'event_accessibility', $id, '' ),
+		'schedule'      => (array) rivermere_field( 'event_schedule', $id, array() ),
+		'faqs'          => (array) rivermere_field( 'event_faqs', $id, array() ),
+		'gallery'       => (array) rivermere_field( 'event_gallery', $id, array() ),
+		'vendors'       => array_filter( array_map( 'absint', (array) rivermere_field( 'event_vendors', $id, array() ) ) ),
+	);
+	if ( '' === $data['directions'] ) {
+		$query = trim( preg_replace( '/\s+/', ' ',wp_strip_all_tags( str_replace( '<br />', ', ', $data['address'] ) ) ) );
+		if ( '' === $query ) {
+			$query = $data['location'];
+		}
+		if ( '' !== $query ) {
+			$data['directions'] = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( $query );
+		}
+	}
+	return $data;
+}
+
+/**
+ * Calendar (.ics) download URL, served by the Rivermere Core plugin.
+ *
+ * @param int $id Event ID.
+ * @return string
+ */
+function rivermere_event_ics_url( $id ) {
+	return add_query_arg( 'rm-ics', '1', get_permalink( $id ) );
 }

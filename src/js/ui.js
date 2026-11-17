@@ -91,3 +91,38 @@ export function initComingSoon() {
 		button.addEventListener('click', () => showToast(button.dataset.comingSoon));
 	});
 }
+
+/** Copy a string: async Clipboard API on secure origins, execCommand fallback elsewhere (e.g. http dev sites). */
+const copyText = async (text) => {
+	if (navigator.clipboard && window.isSecureContext) {
+		await navigator.clipboard.writeText(text);
+		return true;
+	}
+	const field = document.createElement('textarea');
+	field.value = text;
+	field.setAttribute('readonly', '');
+	field.style.position = 'fixed';
+	field.style.opacity = '0';
+	document.body.appendChild(field);
+	field.select();
+	const done = document.execCommand('copy');
+	field.remove();
+	return done;
+};
+
+/** Copy event link buttons. */
+export function initCopyLink() {
+	document.querySelectorAll('[data-copy-link]').forEach((button) => {
+		button.addEventListener('click', async () => {
+			try {
+				if (await copyText(button.dataset.copyLink)) {
+					showToast(button.dataset.copied);
+					return;
+				}
+			} catch {
+				// fall through to the manual prompt
+			}
+			window.prompt('Copy this link:', button.dataset.copyLink);
+		});
+	});
+}

@@ -1,0 +1,83 @@
+{
+    "key": "group_rm_category_icon",
+    "title": "Category Display",
+    "fields": [
+        {
+            "key": "field_rm_term_category_icon",
+            "label": "Icon",
+            "name": "category_icon",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "arrow": "Arrow",
+                "search": "Search",
+                "close": "Close",
+                "menu": "Menu",
+                "leaf": "Leaf",
+                "people": "People",
+                "heart": "Heart",
+                "apple": "Apple",
+                "croissant": "Croissant",
+                "cheese": "Cheese",
+                "plant": "Plant",
+                "basket": "Basket",
+                "music": "Music",
+                "calendar": "Calendar",
+                "pin": "Pin",
+                "clock": "Clock",
+                "mail": "Mail",
+                "phone": "Phone",
+                "facebook": "Facebook",
+                "instagram": "Instagram",
+                "x": "X",
+                "youtube": "Youtube",
+                "tiktok": "Tiktok",
+                "linkedin": "Linkedin",
+                "whatsapp": "Whatsapp",
+                "chevron": "Chevron",
+                "arrow-up": "Arrow-up",
+                "globe": "Globe",
+                "external": "External"
+            },
+            "allow_null": 0,
+            "return_format": "value",
+            "default_value": "leaf",
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "rm_product_category"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "",
+    "show_in_rest": false,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1794949064
+}

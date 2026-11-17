@@ -31,8 +31,7 @@ $uid = 'imgtxt-' . wp_unique_id();
 					false,
 					array(
 						'class'    => 'image-text__img',
-						'alt'      => $alt,
-						'loading'  => 'lazy',
+												'loading'  => 'lazy',
 						'decoding' => 'async',
 						'sizes'    => '(min-width: 1024px) 55vw, 100vw',
 					)

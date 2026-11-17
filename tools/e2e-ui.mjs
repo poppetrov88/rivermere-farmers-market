@@ -6,6 +6,8 @@ const browser = await puppeteer.launch({
 	headless: true,
 	ignoreDefaultArgs: ['--hide-scrollbars'],
 });
+// Pre-set a stored cookie choice so the first-visit banner does not cover the page under test.
+await browser.setCookie({ name: 'rm_consent', value: encodeURIComponent(JSON.stringify({ v: 1, n: 1, a: 0, m: 0, t: new Date().toISOString() })), domain: 'rivermere-farmers-market.local', path: '/' });
 const res = [];
 const ok = (n, c, x = '') => res.push(`${c ? 'PASS' : 'FAIL'} ${n}${x ? ' — ' + x : ''}`);
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));

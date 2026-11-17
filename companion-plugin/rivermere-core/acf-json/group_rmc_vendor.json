@@ -1,0 +1,231 @@
+{
+    "key": "group_rmc_vendor",
+    "title": "Vendor details",
+    "fields": [
+        {
+            "key": "field_rmc_vendor_tagline",
+            "label": "Short description",
+            "name": "vendor_tagline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "One line shown on cards, e.g. \"Fresh, seasonal produce\".",
+            "required": 1,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "maxlength": 80,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rmc_vendor_logo",
+            "label": "Logo",
+            "name": "vendor_logo",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Optional. The main photo is the Featured Image.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
+        },
+        {
+            "key": "field_rmc_vendor_featured",
+            "label": "Featured vendor",
+            "name": "vendor_featured",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Show on the homepage \"Featured Vendors\" section.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 0,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rmc_vendor_stall",
+            "label": "Stall \/ location at the market",
+            "name": "vendor_stall",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rmc_vendor_days",
+            "label": "Attends on",
+            "name": "vendor_days",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "Saturday": "Saturday",
+                "Sunday": "Sunday",
+                "Weekdays": "Weekdays"
+            },
+            "layout": "horizontal",
+            "default_value": [],
+            "allow_custom": 0,
+            "save_custom": 0,
+            "toggle": 0,
+            "return_format": "value",
+            "custom_choice_button_text": "Add new choice"
+        },
+        {
+            "key": "field_rmc_vendor_website",
+            "label": "Website",
+            "name": "vendor_website",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rmc_vendor_email",
+            "label": "Contact email",
+            "name": "vendor_email",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rmc_vendor_phone",
+            "label": "Phone",
+            "name": "vendor_phone",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rmc_vendor_instagram",
+            "label": "Instagram URL",
+            "name": "vendor_instagram",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rmc_vendor_facebook",
+            "label": "Facebook URL",
+            "name": "vendor_facebook",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "rm_vendor"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "",
+    "show_in_rest": false,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1794950218,
+    "local_file": "D:Projectsrivermere-farmers-market-wpcompanion-pluginrivermere-core\/acf-json\/group_rmc_vendor.json"
+}
