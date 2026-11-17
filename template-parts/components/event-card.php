@@ -15,6 +15,7 @@ $times    = rivermere_event_times( $event->ID );
 $location = rivermere_field( 'event_location', $event->ID, '' );
 $tagline  = rivermere_field( 'event_tagline', $event->ID, '' );
 $start    = $times['start'];
+$tag      = isset( $args['heading'] ) && in_array( $args['heading'], array( 'h2', 'h3' ), true ) ? $args['heading'] : 'h3';
 ?>
 <article class="event-card-sm">
 	<a class="event-card-sm__link" href="<?php echo esc_url( get_permalink( $event ) ); ?>">
@@ -25,7 +26,7 @@ $start    = $times['start'];
 			</time>
 		<?php endif; ?>
 		<div class="event-card-sm__body">
-			<h3 class="event-card-sm__title"><?php echo esc_html( get_the_title( $event ) ); ?></h3>
+			<<?php echo esc_html( $tag ); ?> class="event-card-sm__title"><?php echo esc_html( get_the_title( $event ) ); ?></<?php echo esc_html( $tag ); ?>>
 			<?php if ( $tagline ) : ?>
 				<p class="event-card-sm__tagline"><?php echo esc_html( $tagline ); ?></p>
 			<?php endif; ?>

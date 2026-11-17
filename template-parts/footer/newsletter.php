@@ -30,13 +30,13 @@ $privacy = $privacy ? $privacy : (string) rivermere_option( 'privacy_page', '' )
 			</div>
 		</div>
 
-		<form class="newsletter__form" method="post" action="" novalidate data-newsletter-form>
+		<form class="newsletter__form" method="post" novalidate data-newsletter-form>
 			<div class="newsletter__row">
 				<label class="screen-reader-text" for="newsletter-email"><?php esc_html_e( 'Email address', 'rivermere-market' ); ?></label>
 				<div class="newsletter__field">
 					<?php echo rivermere_icon( 'mail', 'newsletter__field-icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					<input type="email" id="newsletter-email" name="email" placeholder="<?php esc_attr_e( 'Enter your email address', 'rivermere-market' ); ?>" autocomplete="email" required aria-describedby="newsletter-status">
-					<button type="submit" class="btn btn--accent btn--sm" data-newsletter-submit><span><?php esc_html_e( 'Subscribe', 'rivermere-market' ); ?></span></button>
+					<button type="submit" class="btn btn--accent btn--sm" data-newsletter-submit data-insights-event="newsletter_cta" data-insights-label="newsletter-footer"><span><?php esc_html_e( 'Subscribe', 'rivermere-market' ); ?></span></button>
 				</div>
 			</div>
 			<div class="newsletter__consent">

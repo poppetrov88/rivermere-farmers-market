@@ -103,6 +103,7 @@
   }
 
   a { color: #fff; }
+  a.btn { color: var(--btn-fg); }
 }
 
 .footer-brand__desc { margin-block: var(--sp-5); max-width: 38ch; font-size: .9375rem; }

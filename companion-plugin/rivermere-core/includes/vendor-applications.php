@@ -30,6 +30,16 @@ function rivermere_app_setting( $name, $default = '' ) {
 }
 
 /**
+ * Success message (Theme Settings, with a built-in default).
+ *
+ * @return string
+ */
+function rivermere_app_success_message() {
+	$msg = (string) rivermere_app_setting( 'apps_success', '' );
+	return '' !== trim( $msg ) ? $msg : __( 'Thank you for applying! Your application has been received. Our team will review your information and contact you about the next steps.', 'rivermere-core' );
+}
+
+/**
  * Application statuses.
  *
  * @return array<string,string>
@@ -60,10 +70,51 @@ function rivermere_app_is_open() {
 }
 
 /**
+ * Capability map for the private application post type.
+ *
+ * @return array<string,string>
+ */
+function rivermere_app_caps() {
+	return array(
+		'edit_post'              => 'edit_vendor_application',
+		'read_post'              => 'read_vendor_application',
+		'delete_post'            => 'delete_vendor_application',
+		'edit_posts'             => 'edit_vendor_applications',
+		'edit_others_posts'      => 'edit_others_vendor_applications',
+		'delete_posts'           => 'delete_vendor_applications',
+		'publish_posts'          => 'publish_vendor_applications',
+		'read_private_posts'     => 'read_private_vendor_applications',
+		'delete_private_posts'   => 'delete_private_vendor_applications',
+		'delete_published_posts' => 'delete_published_vendor_applications',
+		'delete_others_posts'    => 'delete_others_vendor_applications',
+		'edit_private_posts'     => 'edit_private_vendor_applications',
+		'edit_published_posts'   => 'edit_published_vendor_applications',
+		'create_posts'           => 'do_not_allow', // Applications come only from the public form.
+	);
+}
+
+/**
+ * Grant the application capabilities to exactly the users who can manage_options (administrators).
+ *
+ * @param array $allcaps All capabilities of the user.
+ * @return array
+ */
+function rivermere_app_grant_caps( $allcaps ) {
+	if ( ! empty( $allcaps['manage_options'] ) ) {
+		foreach ( rivermere_app_caps() as $cap ) {
+			if ( 'do_not_allow' !== $cap ) {
+				$allcaps[ $cap ] = true;
+			}
+		}
+	}
+	return $allcaps;
+}
+add_filter( 'user_has_cap', 'rivermere_app_grant_caps' );
+
+/**
  * Register the private post type.
  */
 function rivermere_register_application_cpt() {
-	$cap = 'manage_options';
 	register_post_type(
 		'vendor_application',
 		array(
@@ -92,22 +143,9 @@ function rivermere_register_application_cpt() {
 			'menu_position'       => 23,
 			'supports'            => array( 'title' ),
 			'map_meta_cap'        => true,
-			'capabilities'        => array(
-				'edit_post'              => $cap,
-				'read_post'              => $cap,
-				'delete_post'            => $cap,
-				'edit_posts'             => $cap,
-				'edit_others_posts'      => $cap,
-				'delete_posts'           => $cap,
-				'publish_posts'          => $cap,
-				'read_private_posts'     => $cap,
-				'delete_private_posts'   => $cap,
-				'delete_published_posts' => $cap,
-				'delete_others_posts'    => $cap,
-				'edit_private_posts'     => $cap,
-				'edit_published_posts'   => $cap,
-				'create_posts'           => 'do_not_allow',
-			),
+			// Dedicated capability names. NEVER map meta caps (edit_post, ...) onto a primitive such as
+			// 'manage_options': WordPress would then treat manage_options itself as a per-post meta cap.
+			'capabilities'        => rivermere_app_caps(),
 		)
 	);
 }
@@ -202,7 +240,7 @@ function rivermere_app_handle( WP_REST_Request $request ) {
 
 	// Honeypot: pretend success so bots learn nothing; nothing is stored.
 	if ( '' !== trim( (string) ( $p['company_website'] ?? '' ) ) ) {
-		return new WP_REST_Response( array( 'success' => true, 'message' => (string) rivermere_app_setting( 'apps_success', '' ) ), 200 );
+		return new WP_REST_Response( array( 'success' => true, 'message' => rivermere_app_success_message() ), 200 );
 	}
 	$ts = (int) ( $p['rm_ts'] ?? 0 );
 	if ( $ts > 0 && ( time() - $ts ) < 3 ) {
@@ -213,7 +251,7 @@ function rivermere_app_handle( WP_REST_Request $request ) {
 	$submission_id = isset( $p['submission_id'] ) ? preg_replace( '/[^a-zA-Z0-9\-]/', '', (string) $p['submission_id'] ) : '';
 	$idem_key      = $submission_id ? 'rm_appid_' . md5( $submission_id ) : '';
 	if ( $idem_key && get_transient( $idem_key ) ) {
-		return new WP_REST_Response( array( 'success' => true, 'duplicate' => true, 'message' => (string) rivermere_app_setting( 'apps_success', '' ) ), 200 );
+		return new WP_REST_Response( array( 'success' => true, 'duplicate' => true, 'message' => rivermere_app_success_message() ), 200 );
 	}
 
 	// Rate limit: 3 stored/attempted submissions per hour per client.
@@ -281,7 +319,7 @@ function rivermere_app_handle( WP_REST_Request $request ) {
 			"SELECT p.ID FROM {$wpdb->posts} p
 			 INNER JOIN {$wpdb->postmeta} e ON e.post_id = p.ID AND e.meta_key = '_app_email' AND e.meta_value = %s
 			 INNER JOIN {$wpdb->postmeta} b ON b.post_id = p.ID AND b.meta_key = '_app_business_name' AND b.meta_value = %s
-			 WHERE p.post_type = 'vendor_application' AND p.post_date_gmt > %s LIMIT 1",
+			 WHERE p.post_type = 'vendor_application' AND p.post_status <> 'trash' AND p.post_date_gmt > %s LIMIT 1",
 			$data['email'],
 			$data['business_name'],
 			gmdate( 'Y-m-d H:i:s', time() - 30 * DAY_IN_SECONDS )
@@ -337,7 +375,7 @@ function rivermere_app_handle( WP_REST_Request $request ) {
 	 */
 	do_action( 'rivermere_vendor_application_saved', $id, array( 'category' => $data['category'] ) );
 
-	return new WP_REST_Response( array( 'success' => true, 'message' => (string) rivermere_app_setting( 'apps_success', '' ) ), 200 );
+	return new WP_REST_Response( array( 'success' => true, 'message' => rivermere_app_success_message() ), 200 );
 }
 
 /**
@@ -427,7 +465,7 @@ function rivermere_app_box_status( $post ) {
 	wp_nonce_field( 'rm_app_save_' . $post->ID, 'rm_app_nonce' );
 	$status = (string) get_post_meta( $post->ID, '_app_status', true );
 	$status = isset( rivermere_app_statuses()[ $status ] ) ? $status : 'new';
-	echo '<p><label for="rm_app_status"><strong>' . esc_html__( 'Status', 'rivermere-core' ) . '</strong></label><br><select name="rm_app_status" id="rm_app_status" style="width:100%">';
+	echo '<p><label for="rm_app_status_field"><strong>' . esc_html__( 'Status', 'rivermere-core' ) . '</strong></label><br><select name="rm_app_status" id="rm_app_status_field" style="width:100%">';
 	foreach ( rivermere_app_statuses() as $key => $label ) {
 		echo '<option value="' . esc_attr( $key ) . '"' . selected( $status, $key, false ) . '>' . esc_html( $label ) . '</option>';
 	}

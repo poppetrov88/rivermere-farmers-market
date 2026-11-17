@@ -96,6 +96,7 @@ function rivermere_demo_phase4() {
 
 	// ---- Vendor application settings (Theme Settings).
 	rivermere_demo_fill( 'apps_instructions', 'Tell us about your business and products. Fields marked * are required.', 'option' );
+	rivermere_demo_fill( 'apps_success', 'Thank you for applying! Your application has been received. Our team will review your information and contact you about the next steps.', 'option' );
 	rivermere_demo_fill( 'apps_booth', 'Stall and equipment requirements are shared with approved applicants.', 'option' );
 
 	// ---- Become a Vendor page.

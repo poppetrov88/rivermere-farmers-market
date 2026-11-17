@@ -84,7 +84,7 @@ $share = array(
 
 		<div class="event-card__actions">
 			<?php if ( $ev['registration'] ) : ?>
-				<?php echo rivermere_button( array( 'url' => $ev['registration'], 'title' => __( 'Register', 'rivermere-market' ), 'target' => '_blank' ), 'accent', array( 'class' => 'btn--block' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php echo rivermere_button( array( 'url' => $ev['registration'], 'title' => __( 'Register', 'rivermere-market' ), 'target' => '_blank' ), 'accent', array( 'class' => 'btn--block', 'attrs' => array( 'data-insights-event' => 'register', 'data-insights-label' => 'event-register' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<?php endif; ?>
 			<?php if ( $ev['directions'] ) : ?>
 				<?php echo rivermere_button( array( 'url' => $ev['directions'], 'title' => __( 'Get directions', 'rivermere-market' ), 'target' => '_blank' ), 'secondary', array( 'icon' => 'pin', 'class' => 'btn--block' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

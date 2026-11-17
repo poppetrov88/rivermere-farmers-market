@@ -20,11 +20,11 @@ get_header();
 					the_post();
 					if ( 'rm_vendor' === $rm_type ) {
 						echo '<div>';
-						get_template_part( 'template-parts/components/vendor-card', null, array( 'post' => get_post() ) );
+						get_template_part( 'template-parts/components/vendor-card', null, array( 'post' => get_post(), 'heading' => 'h2' ) );
 						echo '</div>';
 					} elseif ( 'rm_event' === $rm_type ) {
 						echo '<div>';
-						get_template_part( 'template-parts/components/event-card', null, array( 'post' => get_post() ) );
+						get_template_part( 'template-parts/components/event-card', null, array( 'post' => get_post(), 'heading' => 'h2' ) );
 						echo '</div>';
 					} else {
 						get_template_part( 'template-parts/content/card' );

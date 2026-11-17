@@ -11,7 +11,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const RIVERMERE_LEGAL_VERSION = 1;
+const RIVERMERE_LEGAL_VERSION = 2;
 
 /**
  * Notice shown at the top of each demo legal page.
@@ -45,9 +45,13 @@ function rivermere_legal_privacy() {
 </ul>
 <p>We do not store your IP address with your subscription.</p>
 
+<h3>Vendor applications</h3>
+<p>If you apply to sell at the market through the vendor application form, we store the details you enter: business name, your first and last name, email address, phone number, the products you sell, and any optional information you provide (website, social media profile, business description, product category, city or region, market experience and additional notes). We also store the time of your application, a record of your privacy consent (including the wording you agreed to and the time), the application status (new, under review, approved or rejected) and any internal notes our team adds while reviewing it. Applications are stored in this website’s WordPress database and are visible only to authorised administrators; they are not published and are not available through any public page or API. We email the market team a short notification that an application arrived (without the applicant’s personal details) and, if switched on, send you a generic acknowledgement. Submitting an application does not subscribe you to our newsletter. We do not collect payment through the application form.</p>
 <h3>Technical and security data</h3>
 <p>To limit abuse of the subscription form we keep a short-lived counter (up to one hour) linked to a one-way hash of your IP address. The IP address itself is not stored by this feature. Our web server and hosting provider may also keep standard access logs (such as IP address, browser type and pages requested) for security and troubleshooting: <mark>[hosting provider and log retention period]</mark>.</p>
 
+<h3>Anonymous analytics</h3>
+<p>If you accept <strong>analytics cookies</strong> in our cookie settings, our own analytics tool (Rivermere Insights) counts page views, clicks on key buttons and links (such as calls to action, telephone, email, WhatsApp, social and external links) and completed vendor applications and newsletter sign-ups. These are stored as daily totals in this website’s database. They do not include names, email addresses, phone numbers, anything you type into a form, your IP address or a browser fingerprint, and the tool does not set a cookie or assign you a visitor ID, so the figures are counts, not profiles of individuals. If you reject analytics cookies, or withdraw consent, none of this is recorded. Daily totals are deleted after <mark>[retention period, default 365 days]</mark>. If Google Analytics is also enabled for this website, it is loaded only after you accept analytics cookies (see the Cookie Policy). <mark>[Confirm which analytics tools are actually enabled]</mark></p>
 <h3>Cookies and similar technologies</h3>
 <p>We use a small first-party cookie to remember your cookie choices. Optional analytics cookies are used only if analytics is switched on for this website and you have agreed. See our <a href="/cookie-policy/">Cookie Policy</a> for details.</p>
 
@@ -59,6 +63,7 @@ function rivermere_legal_privacy() {
 <li><strong>Sending market updates</strong> (newsletter): your consent, given by ticking the consent box. You can withdraw it at any time.</li>
 <li><strong>Keeping the site secure and working</strong>: our legitimate interest in protecting the website.</li>
 <li><strong>Analytics (if enabled)</strong>: your consent, given through the cookie settings.</li>
+<li><strong>Reviewing vendor applications</strong>: taking steps at your request before entering into an arrangement with you, supported by the consent you give on the form. <mark>[confirm legal basis for your jurisdiction]</mark></li>
 <li><strong>Answering enquiries</strong>: our legitimate interest in responding to you. <mark>[confirm legal bases for your jurisdiction]</mark></li>
 </ul>
 
@@ -66,11 +71,13 @@ function rivermere_legal_privacy() {
 <p>The consent box on the newsletter form is never pre-ticked, and the form cannot be submitted without it. After you subscribe we send a confirmation email containing an unsubscribe link. Every message we send includes that link. Opening the link asks you to confirm, then marks your address as unsubscribed. You can also contact us to be removed. We do not use double opt-in verification at present.</p>
 
 <h2>5. Who we share information with</h2>
-<p>We do not sell your personal information. We share it only with service providers who help us run the website and send email, for example <mark>[hosting provider]</mark> and <mark>[email delivery provider]</mark>, under appropriate agreements. If analytics is enabled and you consent, anonymised usage data is processed by <mark>[analytics provider, e.g. Google Analytics 4]</mark>. Links to external services (maps, social networks, share buttons) take you to sites with their own privacy policies; we do not load their scripts on this website.</p>
+<p>We do not sell your personal information. We share it only with service providers who help us run the website and deliver email (for example when we notify the market team about an application), such as <mark>[hosting provider]</mark> and <mark>[email delivery provider]</mark>, under appropriate agreements. If analytics is enabled and you consent, anonymised usage data is processed by <mark>[analytics provider, e.g. Google Analytics 4]</mark>. Links to external services (maps, social networks, share buttons) take you to sites with their own privacy policies; we do not load their scripts on this website.</p>
 
 <h2>6. How long we keep information</h2>
 <ul>
 <li>Newsletter subscribers: until you unsubscribe or ask us to delete your data. After you unsubscribe we keep your address marked as unsubscribed for <mark>[period]</mark> so we do not email you again, then delete it.</li>
+<li>Vendor applications: for as long as needed to review and respond to your application and for <mark>[period]</mark> afterwards, unless you ask us to delete them sooner.</li>
+<li>Anonymous analytics totals: <mark>[retention period, default 365 days]</mark>.</li>
 <li>Rate-limit counters: up to one hour.</li>
 <li>Cookie choices: stored in your browser for up to 180 days, then asked again.</li>
 <li>Server logs: <mark>[period]</mark>.</li>
@@ -83,7 +90,7 @@ function rivermere_legal_privacy() {
 <p>Depending on where you live, you may have the right to access the personal information we hold about you, correct it, delete it, restrict or object to its use, receive a copy in a portable format, withdraw consent at any time and complain to your local data protection authority. <mark>[List the rights and authority that apply in the operator's jurisdiction]</mark></p>
 
 <h2>9. How to make a request</h2>
-<p>To access, correct or delete your information, email <mark>[privacy contact email]</mark> from the address you used to subscribe. We may need to verify your identity and will respond within <mark>[response period]</mark>.</p>
+<p>To access, correct or delete your information (including a vendor application or a newsletter subscription), email <mark>[privacy contact email]</mark> from the address you used to subscribe. We may need to verify your identity and will respond within <mark>[response period]</mark>.</p>
 
 <h2>10. Children</h2>
 <p>This website is not directed at children and we do not knowingly collect their personal information.</p>
@@ -117,6 +124,8 @@ function rivermere_legal_terms() {
 <h2>4. Vendor information</h2>
 <p>Vendor names, products, descriptions and images are provided by or about independent vendors. Vendors are responsible for their own products, prices, quality, allergen information and legal compliance. Vendor availability changes with the season, and a listing is not a guarantee that a vendor will attend on a given day. Please check allergen and ingredient information directly with the vendor.</p>
 
+<h3>Vendor applications</h3>
+<p>Submitting a vendor application does not guarantee a place at the market. We review applications individually, may ask for more information, and may approve or decline an application at our discretion. You must provide accurate information and hold any permits, licences or insurance that apply to your products. Application information is handled as described in the <a href="/privacy-policy/">Privacy Policy</a>.</p>
 <h2>5. Event information, changes and cancellations</h2>
 <p>Dates, times, locations, schedules and activities are correct to the best of our knowledge at the time of publication and may change because of weather, safety, availability or other circumstances. We may postpone, change or cancel events. Where possible we will update the event page and its status. Please check the event page before travelling. Unless we say otherwise, we are not liable for travel or other costs you incur if an event changes.</p>
 
@@ -161,6 +170,7 @@ function rivermere_legal_cookies() {
 <tbody>
 <tr><td><code>rm_consent</code></td><td>Strictly necessary</td><td>Remembers your cookie choices (version, analytics, marketing, timestamp). Set by us.</td><td>180 days</td></tr>
 <tr><td><code>wordpress_*</code>, <code>wp-settings-*</code></td><td>Strictly necessary</td><td>Used only when staff log in to manage the website. Not set for ordinary visitors.</td><td>Session to 14 days</td></tr>
+<tr><td>(none)</td><td>Analytics (optional)</td><td>Rivermere Insights, our own aggregate analytics, runs only if you accept analytics cookies. It records daily totals and <strong>does not set any cookie or local storage and assigns no visitor ID</strong>.</td><td>n/a</td></tr>
 <tr><td><code>_ga</code>, <code>_ga_*</code></td><td>Analytics (optional)</td><td>Used by Google Analytics 4 to count visits and understand which pages are useful. Set only if analytics is configured for this website and you accept analytics cookies. <mark>[Confirm whether analytics is enabled]</mark></td><td>Up to 2 years</td></tr>
 </tbody>
 </table>
@@ -169,7 +179,7 @@ function rivermere_legal_cookies() {
 <p>These are required for the website to remember your cookie choices and, for staff, to log in securely. They do not need your consent and cannot be switched off.</p>
 
 <h2>4. Analytics cookies</h2>
-<p>If analytics is enabled, we use them to understand how visitors use the site so we can improve it. They are <strong>off by default</strong>. No analytics script is loaded until you choose "Accept all" or enable analytics in the cookie settings.</p>
+<p>If you accept analytics cookies, we use anonymous counts (page views, key clicks and completed sign-ups or applications) to understand how visitors use the site so we can improve it. If a third-party analytics service such as Google Analytics is configured for this website, it is also loaded only at that point. They are <strong>off by default</strong>. No analytics script is loaded until you choose "Accept all" or enable analytics in the cookie settings.</p>
 
 <h2>5. Marketing cookies</h2>
 <p>This website does not currently use marketing or advertising cookies. If that changes, they will also be off by default and will load only after you agree.</p>

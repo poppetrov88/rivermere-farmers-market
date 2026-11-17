@@ -145,6 +145,7 @@ function rivermere_button( $link, $variant = 'primary', $args = array() ) {
 			'icon'  => 'arrow',
 			'class' => '',
 			'label' => '',
+			'attrs' => array(),
 		)
 	);
 	$label = '' !== $args['label'] ? $args['label'] : ( $link['title'] ?? '' );
@@ -153,14 +154,19 @@ function rivermere_button( $link, $variant = 'primary', $args = array() ) {
 	}
 	$target = ! empty( $link['target'] ) ? ' target="' . esc_attr( $link['target'] ) . '" rel="noopener"' : '';
 	$class  = trim( 'btn btn--' . sanitize_html_class( $variant ) . ' ' . $args['class'] );
+	$extra  = '';
+	foreach ( (array) $args['attrs'] as $attr_name => $attr_value ) {
+		$extra .= ' ' . esc_attr( $attr_name ) . '="' . esc_attr( $attr_value ) . '"';
+	}
 
 	return sprintf(
-		'<a class="%1$s" href="%2$s"%3$s><span>%4$s</span>%5$s</a>',
+		'<a class="%1$s" href="%2$s"%3$s%6$s><span>%4$s</span>%5$s</a>',
 		esc_attr( $class ),
 		esc_url( $link['url'] ),
 		$target, // Already escaped above.
 		esc_html( $label ),
-		$args['icon'] ? rivermere_icon( $args['icon'], 'btn__icon' ) : ''
+		$args['icon'] ? rivermere_icon( $args['icon'], 'btn__icon' ) : '',
+		$extra // Attribute names/values escaped above.
 	);
 }
 

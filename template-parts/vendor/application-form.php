@@ -43,7 +43,7 @@ $cats[]  = __( 'Other', 'rivermere-market' );
 				<p data-apply-success-text></p>
 			</div>
 
-			<form class="apply-form" method="post" action="" novalidate data-apply-form>
+			<form class="apply-form" method="post" novalidate data-apply-form>
 				<div class="apply-form__summary notice notice--error" tabindex="-1" data-apply-summary hidden>
 					<h3 class="apply-form__summary-title" id="apply-summary-title"><?php esc_html_e( 'Please fix the following', 'rivermere-market' ); ?></h3>
 					<ul data-apply-summary-list></ul>
@@ -136,7 +136,7 @@ $cats[]  = __( 'Other', 'rivermere-market' );
 				<input type="hidden" name="submission_id" value="">
 
 				<div class="apply-form__submit">
-					<button type="submit" class="btn btn--secondary" data-apply-submit data-insights-event="apply_submit" data-insights-label="vendor-application"><span><?php esc_html_e( 'Submit Vendor Application', 'rivermere-market' ); ?></span></button>
+					<button type="submit" class="btn btn--secondary" data-apply-submit data-insights-event="apply_attempt" data-insights-label="vendor-application"><span><?php esc_html_e( 'Submit Vendor Application', 'rivermere-market' ); ?></span></button>
 					<p class="apply-form__status" role="status" aria-live="polite" data-apply-status></p>
 				</div>
 			</form>

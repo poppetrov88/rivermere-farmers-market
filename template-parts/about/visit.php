@@ -49,7 +49,7 @@ $has_details = $address || $days || $hours_lines || is_email( $email ) || $phone
 				</div>
 			</div>
 			<?php if ( $has_details ) : ?>
-				<address class="visit__card">
+				<div class="visit__card">
 					<h3 class="visit__name"><?php echo esc_html( $name ); ?></h3>
 					<dl class="visit__list">
 						<?php if ( $days ) : ?>
@@ -68,7 +68,7 @@ $has_details = $address || $days || $hours_lines || is_email( $email ) || $phone
 							<div><dt><?php echo rivermere_icon( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php esc_html_e( 'Telephone', 'rivermere-market' ); ?></dt><dd><a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a></dd></div>
 						<?php endif; ?>
 					</dl>
-				</address>
+				</div>
 			<?php endif; ?>
 		</div>
 	</div>

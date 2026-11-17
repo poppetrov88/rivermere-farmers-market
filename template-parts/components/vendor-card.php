@@ -13,6 +13,7 @@ if ( ! $vendor ) {
 }
 $tagline = rivermere_field( 'vendor_tagline', $vendor->ID, '' );
 $title   = get_the_title( $vendor );
+$tag     = isset( $args['heading'] ) && in_array( $args['heading'], array( 'h2', 'h3' ), true ) ? $args['heading'] : 'h3';
 ?>
 <article class="vendor-card">
 	<a class="vendor-card__link" href="<?php echo esc_url( get_permalink( $vendor ) ); ?>">
@@ -25,7 +26,7 @@ $title   = get_the_title( $vendor );
 		</div>
 		<div class="vendor-card__body">
 			<div>
-				<h3 class="vendor-card__title"><?php echo esc_html( $title ); ?></h3>
+				<<?php echo esc_html( $tag ); ?> class="vendor-card__title"><?php echo esc_html( $title ); ?></<?php echo esc_html( $tag ); ?>>
 				<?php if ( $tagline ) : ?>
 					<p class="vendor-card__tagline"><?php echo esc_html( $tagline ); ?></p>
 				<?php endif; ?>

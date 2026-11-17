@@ -89,6 +89,8 @@
 .check--light {
   color: var(--c-text);
 
+  a { color: var(--c-secondary-600); text-decoration: underline; }
+
   .check__box { background: #fff; border-color: var(--c-secondary-600); }
   &:hover .check__box { background: var(--c-leaf-100); border-color: var(--c-secondary-700); }
 }

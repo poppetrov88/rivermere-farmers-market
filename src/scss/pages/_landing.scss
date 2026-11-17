@@ -280,3 +280,11 @@
     .icon { width: 32px; height: 32px; stroke-width: 2.6; }
   }
 }
+
+// Theme search form (404 / no results).
+.search-form {
+  margin-block: var(--sp-5);
+
+  &__row { display: flex; flex-wrap: wrap; gap: var(--sp-3); max-width: 560px; }
+  .field__control { flex: 1 1 240px; }
+}
