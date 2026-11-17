@@ -1,0 +1,358 @@
+@use '../abstracts/mixins' as m;
+
+// ---------- Custom scrollbar (toggle: Theme Settings → UI) ----------
+html:has(body.has-custom-scrollbar) {
+  // Firefox only: Chromium (121+) would otherwise ignore the 6px webkit pseudo-elements.
+  @supports (-moz-appearance: none) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-secondary-600) var(--c-scroll-track);
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--c-scroll-track);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--c-secondary-600);
+    border-radius: 6px;
+
+    &:hover { background: var(--c-secondary-700); }
+  }
+}
+
+// ---------- Scroll progress ----------
+.scroll-progress {
+  position: fixed;
+  z-index: 1200;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  pointer-events: none;
+
+  &__bar {
+    display: block;
+    width: 0;
+    height: 3px;
+    background: var(--c-secondary-600);
+    transition: width .12s linear;
+  }
+}
+
+// ---------- Utility bar ----------
+.utility-bar {
+  position: relative;
+  z-index: 130;
+  background: var(--c-leaf-100);
+  border-bottom: 1px solid var(--c-leaf-200);
+  color: var(--c-text);
+  font-size: .8125rem;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    min-height: 36px;
+  }
+
+  &__text {
+    display: none;
+    align-items: center;
+    gap: var(--sp-2);
+    font-weight: var(--fw-bold);
+
+    .icon { width: 16px; height: 16px; color: var(--c-secondary-600); }
+
+    @include m.up(sm) { display: flex; }
+  }
+
+  &__group {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    margin-left: auto;
+  }
+}
+
+.social-list--header {
+  margin: 0;
+
+  .social-list__link {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    color: var(--c-primary-900);
+
+    &:hover { background: var(--c-secondary-600); color: #fff; }
+    .icon { width: 18px; height: 18px; }
+  }
+}
+
+.social-list__link {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+
+  &.is-soon { opacity: .85; }
+}
+
+// ---------- Language selector ----------
+.lang {
+  position: relative;
+
+  &__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 32px;
+    padding: 0 var(--sp-2);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-btn);
+    color: var(--c-primary-900);
+    font-size: .8125rem;
+    font-weight: var(--fw-heavy);
+    letter-spacing: .04em;
+    transition: background-color var(--t-base), border-color var(--t-base);
+
+    &:hover,
+    &[aria-expanded='true'] { background: #fff; border-color: var(--c-leaf-200); }
+
+    .icon { width: 16px; height: 16px; }
+  }
+
+  &__chevron { transition: transform var(--t-base); }
+  &__toggle[aria-expanded='true'] &__chevron { transform: rotate(180deg); }
+
+  &__menu {
+    position: absolute;
+    z-index: 5;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 180px;
+    padding: var(--sp-2);
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+
+    &[hidden] { display: none; }
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    width: 100%;
+    min-height: 40px;
+    padding: 0 var(--sp-3);
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-sm);
+    color: var(--c-text);
+    font-size: .875rem;
+    font-weight: var(--fw-medium);
+    text-align: left;
+
+    &:hover,
+    &:focus-visible { background: var(--c-leaf-100); }
+
+    &[aria-current='true'] { color: var(--c-secondary-600); font-weight: var(--fw-heavy); }
+    &[aria-current='true'] .lang__code::after { content: ' ✓'; }
+  }
+
+  &__code { font-size: .75rem; font-weight: var(--fw-heavy); letter-spacing: .06em; color: var(--c-text-soft); }
+}
+
+// ---------- Toast (shared live region) ----------
+.toast {
+  position: fixed;
+  z-index: 1300;
+  bottom: var(--sp-5);
+  left: 50%;
+  max-width: min(92vw, 460px);
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--c-primary-900);
+  border-radius: var(--radius-btn);
+  box-shadow: var(--shadow-lg);
+  color: #fff;
+  font-size: .875rem;
+  font-weight: var(--fw-bold);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 12px);
+  transition: opacity var(--t-base), transform var(--t-base);
+
+  &:empty { display: none; }
+
+  &.is-visible { opacity: 1; transform: translate(-50%, 0); }
+}
+
+// ---------- Back to top ----------
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding: 0 var(--sp-5);
+  background: transparent;
+  border: 1.5px solid rgb(255 255 255 / 45%);
+  border-radius: var(--radius-btn);
+  color: #fff;
+  font-size: .875rem;
+  font-weight: var(--fw-heavy);
+  transition: background-color var(--t-base), color var(--t-base), border-color var(--t-base);
+
+  &__icon { width: 18px; height: 18px; transition: transform var(--t-base); }
+
+  &:hover {
+    background: var(--c-accent-400);
+    border-color: var(--c-accent-400);
+    color: var(--c-primary-900);
+  }
+
+  &:hover &__icon { transform: translateY(-2px); }
+}
+
+// ---------- Floating contact widget ----------
+.contact-widget {
+  --cw-bg: var(--c-secondary-600);
+  --cw-fg: #fff;
+  --cw-hover: var(--c-secondary-700);
+
+  position: fixed;
+  z-index: 900;
+  right: 0;
+  width: 48px; // collapsed rail: never wider than 50px
+
+  &--yellow { --cw-bg: var(--c-accent-400); --cw-fg: var(--c-primary-900); --cw-hover: var(--c-accent-500); }
+  &--dark { --cw-bg: var(--c-primary-900); --cw-fg: #fff; --cw-hover: var(--c-primary-700); }
+
+  &--middle { top: 50%; transform: translateY(-50%); }
+  &--bottom { bottom: 120px; }
+
+  &__toggle { display: none; }
+
+  &__list {
+    background: var(--cw-bg);
+    border-radius: 14px 0 0 14px;
+    box-shadow: var(--shadow-md);
+  }
+
+  &__link {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    background: var(--cw-bg);
+    color: var(--cw-fg);
+    text-decoration: none;
+    transition: background-color var(--t-base);
+
+    .icon { width: 22px; height: 22px; }
+
+    &:hover,
+    &:focus-visible { background: var(--cw-hover); }
+
+    &:focus-visible { outline-offset: -4px; outline-color: #fff; box-shadow: 0 0 0 3px var(--c-focus); }
+  }
+
+  li:first-child &__link { border-radius: 14px 0 0 0; }
+  li:last-child &__link { border-radius: 0 0 0 14px; }
+  li:only-child &__link { border-radius: 14px 0 0 14px; }
+
+  // Expanding label: extends to the left, never changes layout.
+  &__label {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 var(--sp-4) 0 var(--sp-5);
+    background: var(--cw-hover);
+    border-radius: 14px 0 0 14px;
+    box-shadow: var(--shadow-md);
+    font-size: .875rem;
+    font-weight: var(--fw-bold);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(10px);
+    transition: opacity var(--t-base), transform var(--t-base);
+  }
+
+  &__link:hover &__label,
+  &__link:focus-visible &__label {
+    opacity: 1;
+    transform: none;
+  }
+
+  // Phones: collapse behind a small toggle so content is never covered.
+  @include m.down(md) {
+    top: auto;
+    right: 12px;
+    bottom: 16px;
+    width: auto;
+    transform: none;
+
+    &--middle,
+    &--bottom { top: auto; bottom: 16px; transform: none; }
+
+    &__toggle {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-left: auto;
+      background: var(--cw-bg);
+      border: 0;
+      border-radius: 50%;
+      box-shadow: var(--shadow-lg);
+      color: var(--cw-fg);
+
+      .icon { width: 22px; height: 22px; }
+    }
+
+    &__list {
+      position: absolute;
+      right: 0;
+      bottom: 56px;
+      width: 48px;
+      display: none;
+      border-radius: 24px;
+    }
+
+    &.is-open &__list { display: block; }
+
+    &__link,
+    li:first-child &__link,
+    li:last-child &__link,
+    li:only-child &__link { border-radius: 24px; }
+
+    // Labels are always visible when the list is open (no hover on touch).
+    &.is-open &__label {
+      opacity: 1;
+      transform: none;
+      border-radius: 24px;
+      margin-right: 8px;
+    }
+  }
+}
+
+// Keep the fixed phone button from covering the footer's last row.
+@include m.down(md) {
+  .footer-bottom { padding-bottom: calc(var(--sp-4) + 56px); }
+}
+
+.footer-bottom__inner { row-gap: var(--sp-3); }

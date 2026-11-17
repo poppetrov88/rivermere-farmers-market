@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! rivermere_option( 'announcement_enabled', false ) ) {
+if ( ! rivermere_toggle( 'announcement_enabled', false ) ) {
 	return;
 }
 $text = rivermere_option( 'announcement_text', '' );

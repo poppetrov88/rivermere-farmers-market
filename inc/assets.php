@@ -45,12 +45,16 @@ function rivermere_enqueue_assets() {
 		array(
 			'newsletterEndpoint' => esc_url_raw( rest_url( 'rivermere/v1/newsletter' ) ),
 			'restNonce'          => wp_create_nonce( 'wp_rest' ),
+			'siteName'           => rivermere_market_name(),
+			'siteUrl'            => home_url( '/' ),
+			'consoleMessage'     => rivermere_toggle( 'ui_console', true ),
 			'i18n'               => array(
 				'sending'      => __( 'Subscribing…', 'rivermere-market' ),
 				'invalidEmail' => __( 'Please enter a valid email address.', 'rivermere-market' ),
 				'consent'      => __( 'Please tick the consent box to subscribe.', 'rivermere-market' ),
 				'genericError' => __( 'Something went wrong. Please try again later.', 'rivermere-market' ),
 				'subscribe'    => __( 'Subscribe', 'rivermere-market' ),
+				'langSoon'     => __( 'Translations are coming soon. The site is currently available in English.', 'rivermere-market' ),
 			),
 		)
 	);
@@ -110,8 +114,11 @@ add_action( 'wp_head', 'rivermere_brand_css', 5 );
  * @return string[]
  */
 function rivermere_body_classes( $classes ) {
-	if ( rivermere_option( 'header_sticky', true ) ) {
+	if ( rivermere_toggle( 'header_sticky', true ) ) {
 		$classes[] = 'has-sticky-header';
+	}
+	if ( rivermere_toggle( 'ui_scrollbar', true ) ) {
+		$classes[] = 'has-custom-scrollbar';
 	}
 	return $classes;
 }

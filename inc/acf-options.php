@@ -96,18 +96,17 @@ function rivermere_register_options_fields() {
 						array_merge( $f( 'opt_oh', 'time_picker', 'closes', 'Closes', array( 'display_format' => 'H:i', 'return_format' => 'H:i' ) ), $w( 20 ) ),
 					),
 				) ),
-				$f( 'opt', 'repeater', 'social_links', 'Social profiles', array(
-					'layout'       => 'table',
-					'button_label' => 'Add profile',
-					'sub_fields'   => array(
-						array_merge( $f( 'opt_so', 'select', 'network', 'Network', array( 'choices' => rivermere_social_networks() ) ), $w( 30 ) ),
-						array_merge( $f( 'opt_so', 'url', 'url', 'URL' ), $w( 70 ) ),
-					),
-				) ),
+				$f( 'opt', 'text', 'whatsapp_number', 'WhatsApp number', array_merge( $w( 50 ), array( 'instructions' => 'International format, e.g. +44 7700 900123. Used for the wa.me link. Leave empty to hide WhatsApp.' ) ) ),
+				$f( 'opt', 'url', 'facebook_url', 'Facebook URL', array_merge( $w( 33 ), array( 'instructions' => 'Leave empty until the profile exists; the icon then shows a “Coming soon” message.' ) ) ),
+				$f( 'opt', 'url', 'instagram_url', 'Instagram URL', $w( 33 ) ),
+				$f( 'opt', 'url', 'linkedin_url', 'LinkedIn URL', $w( 34 ) ),
 
 				// Header.
 				$tab( 'header', 'Header' ),
-				$f( 'opt', 'link', 'header_cta', 'Header button', array( 'return_format' => 'array', 'instructions' => 'e.g. "Become a Vendor". Leave empty to hide.' ) ),
+				$f( 'opt', 'true_false', 'header_cta_show', 'Show header button', array( 'ui' => 1, 'default_value' => 1, 'wrapper' => array( 'width' => '50' ) ) ),
+				$f( 'opt', 'link', 'header_cta', 'Header button', array( 'return_format' => 'array', 'instructions' => 'e.g. "Become a Vendor". Leave empty to hide.', 'wrapper' => array( 'width' => '50' ) ) ),
+				$f( 'opt', 'true_false', 'header_social', 'Show social icons (utility bar)', array( 'ui' => 1, 'default_value' => 1, 'wrapper' => array( 'width' => '50' ) ) ),
+				$f( 'opt', 'true_false', 'header_language', 'Show language selector (UI only)', array( 'ui' => 1, 'default_value' => 1, 'wrapper' => array( 'width' => '50' ) ) ),
 				$f( 'opt', 'true_false', 'header_sticky', 'Sticky header', array( 'ui' => 1, 'default_value' => 1, 'wrapper' => array( 'width' => '50' ) ) ),
 				$f( 'opt', 'true_false', 'header_search', 'Show search button', array( 'ui' => 1, 'default_value' => 1, 'wrapper' => array( 'width' => '50' ) ) ),
 				$f( 'opt', 'true_false', 'announcement_enabled', 'Show announcement bar', array( 'ui' => 1, 'default_value' => 0 ) ),
@@ -124,6 +123,23 @@ function rivermere_register_options_fields() {
 				$f( 'opt', 'text', 'newsletter_consent', 'Newsletter consent text', array( 'default_value' => 'I agree to receive market updates by email and can unsubscribe at any time.', 'instructions' => 'Shown beside the consent checkbox.' ) ),
 				$f( 'opt', 'page_link', 'privacy_page', 'Privacy policy page', array( 'post_type' => array( 'page' ), 'allow_null' => 1 ) ),
 				$f( 'opt', 'text', 'copyright_text', 'Copyright text', array( 'instructions' => 'Use {year} for the current year. Defaults to "© {year} Site title".' ) ),
+
+				// Floating contact.
+				$tab( 'floating', 'Floating Contact' ),
+				$f( 'opt', 'message', 'floating_note', 'About', array( 'message' => 'Uses the telephone, email and WhatsApp numbers from the General tab. A method is hidden automatically when its detail is empty.', 'new_lines' => 'wpautop' ) ),
+				$f( 'opt', 'true_false', 'floating_enabled', 'Enable floating contact widget', array( 'ui' => 1, 'default_value' => 1 ) ),
+				$f( 'opt', 'true_false', 'floating_phone', 'Show telephone', array( 'ui' => 1, 'default_value' => 1, 'wrapper' => array( 'width' => '33' ) ) ),
+				$f( 'opt', 'true_false', 'floating_email', 'Show email', array( 'ui' => 1, 'default_value' => 1, 'wrapper' => array( 'width' => '33' ) ) ),
+				$f( 'opt', 'true_false', 'floating_whatsapp', 'Show WhatsApp', array( 'ui' => 1, 'default_value' => 1, 'wrapper' => array( 'width' => '34' ) ) ),
+				$f( 'opt', 'button_group', 'floating_variant', 'Colour variant', array( 'choices' => array( 'green' => 'Green', 'yellow' => 'Yellow', 'dark' => 'Dark' ), 'default_value' => 'green', 'wrapper' => array( 'width' => '50' ) ) ),
+				$f( 'opt', 'button_group', 'floating_position', 'Vertical position', array( 'choices' => array( 'middle' => 'Middle', 'bottom' => 'Lower' ), 'default_value' => 'middle', 'wrapper' => array( 'width' => '50' ) ) ),
+
+				// UI.
+				$tab( 'ui', 'UI Features' ),
+				$f( 'opt', 'true_false', 'ui_scrollbar', 'Enable custom green scrollbar', array( 'ui' => 1, 'default_value' => 1 ) ),
+				$f( 'opt', 'true_false', 'ui_progress', 'Enable scroll progress bar', array( 'ui' => 1, 'default_value' => 1 ) ),
+				$f( 'opt', 'true_false', 'ui_back_to_top', 'Enable footer back-to-top button', array( 'ui' => 1, 'default_value' => 1 ) ),
+				$f( 'opt', 'true_false', 'ui_console', 'Enable browser console welcome message', array( 'ui' => 1, 'default_value' => 1 ) ),
 
 				// Appearance.
 				$tab( 'appearance', 'Appearance' ),

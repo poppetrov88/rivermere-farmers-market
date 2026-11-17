@@ -41,6 +41,11 @@ function rivermere_icons() {
 		'x'        => '<path d="M4 4l16 16M20 4 4 20"/>',
 		'youtube'  => '<rect x="3" y="6" width="18" height="12" rx="3.500"/><path d="m10 9.500 5 2.500-5 2.500Z"/>',
 		'tiktok'   => '<path d="M14 4v10.500a3.500 3.500 0 1 1-3.500-3.500M14 4c.500 2.500 2 4 5 4"/>',
+		'linkedin' => '<path d="M6.500 9.500v9M6.500 5.500v.5"/><path d="M11 18.500v-9M11 13c0-2.200 1.500-3.500 3.500-3.500s3 1.300 3 3.500v5.500"/>',
+		'whatsapp' => '<path d="M4 20l1.200-4.200A8 8 0 1 1 8.300 19Z"/><path d="M9.200 8.800c0 3 2.500 5.800 5.800 6l1-1.400-2-1-.8.800c-.8-.3-1.700-1.200-2-2l.8-.8-1-2Z"/>',
+		'chevron'  => '<path d="m6 9 6 6 6-6"/>',
+		'arrow-up' => '<path d="M12 19V5M6 11l6-6 6 6"/>',
+		'globe'    => '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.500 2.700 3.700 5.700 3.700 9S14.500 18.300 12 21c-2.500-2.700-3.700-5.700-3.700-9S9.500 5.700 12 3Z"/>',
 		'external' => '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
 	);
 	return $icons;
@@ -193,8 +198,46 @@ function rivermere_social_networks() {
 	return array(
 		'facebook'  => 'Facebook',
 		'instagram' => 'Instagram',
-		'x'         => 'X (Twitter)',
-		'youtube'   => 'YouTube',
-		'tiktok'    => 'TikTok',
+		'linkedin'  => 'LinkedIn',
 	);
+}
+
+/**
+ * Boolean Theme Setting with a default for never-saved fields (ACF returns false for an
+ * explicit 'off', which rivermere_option() would treat as empty).
+ *
+ * @param string $name    Field name.
+ * @param bool   $default Default when never saved.
+ * @return bool
+ */
+function rivermere_toggle( $name, $default = true ) {
+	if ( ! function_exists( 'get_field' ) ) {
+		return $default;
+	}
+	$value = get_field( $name, 'option' );
+	return null === $value ? $default : (bool) $value;
+}
+
+/**
+ * Configured social URLs keyed by network (empty string when not configured).
+ *
+ * @return array<string,string>
+ */
+function rivermere_social_urls() {
+	$urls = array();
+	foreach ( rivermere_social_networks() as $key => $label ) {
+		$urls[ $key ] = esc_url_raw( (string) rivermere_option( $key . '_url', '' ), array( 'http', 'https' ) );
+	}
+	return $urls;
+}
+
+/**
+ * Digits-only international number for wa.me (8-15 digits) or ''.
+ *
+ * @param string $number Raw input.
+ * @return string
+ */
+function rivermere_whatsapp_digits( $number ) {
+	$digits = preg_replace( '/\D+/', '', (string) $number );
+	return ( strlen( $digits ) >= 8 && strlen( $digits ) <= 15 ) ? $digits : '';
 }

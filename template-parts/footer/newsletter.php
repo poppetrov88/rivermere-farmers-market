@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! rivermere_option( 'newsletter_enabled', true ) ) {
+if ( ! rivermere_toggle( 'newsletter_enabled', true ) ) {
 	return;
 }
 $heading = rivermere_option( 'newsletter_heading', __( 'Stay in the Loop', 'rivermere-market' ) );

@@ -14,8 +14,6 @@ $phone     = rivermere_option( 'phone', '' );
 $address   = rivermere_option( 'address', '' );
 $maps      = rivermere_option( 'maps_url', '' );
 $days      = rivermere_option( 'market_days', '' );
-$socials   = rivermere_option( 'social_links', array() );
-$networks  = rivermere_social_networks();
 $privacy   = get_privacy_policy_url();
 $privacy   = $privacy ? $privacy : rivermere_option( 'privacy_page', '' );
 ?>
@@ -58,23 +56,7 @@ $privacy   = $privacy ? $privacy : rivermere_option( 'privacy_page', '' );
 				<?php endif; ?>
 			</address>
 
-			<?php if ( $socials ) : ?>
-				<ul class="social-list">
-					<?php foreach ( $socials as $social ) : ?>
-						<?php
-						if ( empty( $social['url'] ) || empty( $social['network'] ) || ! isset( $networks[ $social['network'] ] ) ) {
-							continue;
-						}
-						?>
-						<li>
-							<a class="social-list__link" href="<?php echo esc_url( $social['url'] ); ?>" target="_blank" rel="noopener me">
-								<?php echo rivermere_icon( $social['network'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-								<span class="screen-reader-text"><?php echo esc_html( $networks[ $social['network'] ] ); ?></span>
-							</a>
-						</li>
-					<?php endforeach; ?>
-				</ul>
-			<?php endif; ?>
+			<?php get_template_part( 'template-parts/components/social-links', null, array( 'class' => 'social-list--footer' ) ); ?>
 		</div>
 	</div>
 </div>
@@ -82,6 +64,7 @@ $privacy   = $privacy ? $privacy : rivermere_option( 'privacy_page', '' );
 <div class="footer-bottom">
 	<div class="container footer-bottom__inner">
 		<p><?php echo esc_html( rivermere_copyright() ); ?></p>
+		<?php get_template_part( 'template-parts/components/back-to-top' ); ?>
 		<nav aria-label="<?php esc_attr_e( 'Legal', 'rivermere-market' ); ?>">
 			<?php
 			if ( has_nav_menu( 'legal' ) ) {

@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! rivermere_option( 'header_search', true ) ) {
+if ( ! rivermere_toggle( 'header_search', true ) ) {
 	return;
 }
 ?>

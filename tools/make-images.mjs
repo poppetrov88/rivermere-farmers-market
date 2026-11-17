@@ -15,12 +15,7 @@ const crops = {
 };
 
 for (const [name, [left, top, width, height]] of Object.entries(crops)) {
-	let img = sharp(SRC).extract({ left, top, width, height });
-	if (name === 'placeholder-hero') {
-		// Paint over headline remnants on the left edge; the theme draws its own green shape there.
-		const patch = await sharp({ create: { width: 90, height: 320, channels: 3, background: '#053120' } }).png().toBuffer();
-		img = sharp(await img.png().toBuffer()).composite([{ input: patch, left: 0, top: 0 }]);
-	}
+	const img = sharp(SRC).extract({ left, top, width, height });
 	await img.webp({ quality: 82 }).toFile(`${OUT}${name}.webp`);
 	console.log(name);
 }

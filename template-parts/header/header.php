@@ -7,8 +7,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$cta         = rivermere_option( 'header_cta', array() );
-$show_search = (bool) rivermere_option( 'header_search', true );
+$cta         = rivermere_toggle( 'header_cta_show', true ) ? rivermere_option( 'header_cta', array() ) : array();
+$show_search = rivermere_toggle( 'header_search', true );
 ?>
 <div class="container site-header__inner">
 	<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: market name */ __( '%s – home', 'rivermere-market' ), rivermere_market_name() ) ); ?>">

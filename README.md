@@ -35,6 +35,30 @@ Sources: `src/scss` (abstracts → base → layout → components → sections �
 - **Events**: start/end date-time, location, tagline, registration URL. The homepage banner shows the next upcoming event automatically (or a chosen one).
 - ACF field groups are registered in PHP with stable keys (theme: page builder, options; plugin: vendor/event). `acf-json/` is intentionally empty to avoid duplicate registration.
 
+## UI features (Theme Settings)
+All are toggled in **Theme Settings** and default to on.
+- **Header** tab: show social icons, language selector, search, header button. Social + language live in a slim utility bar above the header (keeps the main header identical to the design).
+- **General** tab: telephone, email, WhatsApp number, Facebook / Instagram / LinkedIn URLs. A social URL that is empty renders a button that announces “coming soon” (no dead link); once set it becomes an external link (). The old repeater  was replaced by these three fields.
+- **Floating Contact** tab: enable, show phone/email/WhatsApp, colour variant (green/yellow/dark), vertical position. A method with no data is hidden. WhatsApp uses  (8–15 digits required). The rail is 48px wide; labels expand left on hover/keyboard focus; below 768px it collapses to a 48px corner button.
+- **UI Features** tab: custom 6px green scrollbar (Chromium/Safari pseudo-elements, Firefox ), 3px scroll progress bar, footer back-to-top (honours reduced motion), console welcome message (business text only).
+- **Language selector is UI-only**: English remains the site language; other choices show a “coming soon” message. To add real multilingual support later, filter  or replace .
+- Tests: PASS search opens 
+PASS input focused 
+PASS scroll locked 
+PASS esc closes 
+PASS focus restored 
+PASS scroll unlocked 
+PASS search results page Search results for “honey”
+PASS search finds vendor 
+PASS invalid email rejected error|Please enter a valid email address.
+PASS consent required error|Please tick the consent box to subscribe.
+PASS subscribe success success|Thanks for subscribing! Check your inbox for a confirmation email.
+PASS duplicate handled gracefully success|Thanks for subscribing! Check your inbox for a confirmation email.
+PASS nav hidden on mobile 
+PASS nav opens 
+PASS esc closes nav + focus on toggle 
+console errors: none and  (Puppeteer + local Chrome; the UI test expects a WhatsApp number and Facebook/LinkedIn URLs to be set).
+
 ## Newsletter
 Footer band → REST endpoint `POST /wp-json/rivermere/v1/newsletter`. Protections: REST nonce, honeypot, minimum time, per-IP rate limit (hashed, transient), server-side email validation/normalisation, unique emails, prepared queries. Subscribers table `wp_rm_subscribers`. Admin: **Newsletter Subscribers** (search, filter, delete, bulk delete, CSV export — admin-only, nonce-protected, formula-injection safe). It is **single opt-in with an explicit consent checkbox**, not double opt-in; each confirmation email carries an unsubscribe link (confirmation page via POST). Subscribers are never added to external lists.
 Note: the nonce expires after 12–24 h, so cached pages must have a cache lifetime shorter than that (or users see "session expired — reload").
