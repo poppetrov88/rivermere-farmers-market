@@ -4,7 +4,7 @@
 .newsletter {
   position: relative;
   overflow: hidden;
-  padding-block: var(--sp-6);
+  padding-block: var(--section-space-sm);
   background:
     radial-gradient(120% 140% at 50% 130%, #2a5f2b 0%, transparent 60%),
     linear-gradient(180deg, #184126, #17401f);
@@ -91,31 +91,31 @@
 
 // ---------- Footer proper ----------
 .footer-main {
-  padding-block: var(--sp-7) var(--sp-5);
+  padding-block: var(--section-space-sm) var(--sp-8);
   background: #0b2416;
   color: rgb(255 255 255 / 88%);
 
   &__grid {
     display: grid;
-    gap: var(--sp-7);
+    gap: var(--sp-8);
 
-    @include m.up(md) { grid-template-columns: 1.4fr 1fr 1.2fr; gap: var(--sp-8); }
+    @include m.up(md) { grid-template-columns: 1.4fr 1fr 1.2fr; gap: var(--sp-9); }
   }
 
   a { color: #fff; }
 }
 
-.footer-brand__desc { margin-block: var(--sp-4); max-width: 38ch; font-size: .9375rem; }
+.footer-brand__desc { margin-block: var(--sp-5); max-width: 38ch; font-size: .9375rem; }
 
 .footer-title {
-  margin-bottom: var(--sp-4);
+  margin-bottom: var(--sp-5);
   color: var(--c-accent-400);
   font-size: .8125rem;
   letter-spacing: var(--ls-wide);
   text-transform: uppercase;
 }
 
-.footer-nav .menu { display: grid; gap: var(--sp-2); a { text-decoration: none; &:hover { text-decoration: underline; } } }
+.footer-nav .menu { display: grid; gap: var(--sp-3); a { text-decoration: none; &:hover { text-decoration: underline; } } }
 
 .footer-contact {
   address p { display: flex; gap: var(--sp-3); margin-bottom: var(--sp-3); font-size: .9375rem; }
@@ -219,4 +219,11 @@
   .footer-legal { order: 2; }
   .footer-cookie-settings { order: 3; }
   .back-to-top { order: 4; margin-left: auto; }
+}
+
+@include m.down(sm) {
+  .newsletter__intro { gap: var(--sp-3); }
+  .newsletter__intro > div { min-width: 0; }
+  .newsletter__icon { width: 40px; height: 40px; }
+  .newsletter__title { font-size: 1.5rem; }
 }

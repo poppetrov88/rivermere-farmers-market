@@ -1,5 +1,6 @@
 @use '../abstracts/tokens' as t;
 @use 'sass:map';
+@use '../abstracts/mixins' as m;
 
 // Runtime-customisable tokens. Brand colours can be overridden from Theme Settings.
 @font-face {
@@ -62,7 +63,14 @@
     --sp-#{$key}: #{$value};
   }
 
-  --section-y: clamp(48px, 3rem + 2.5vw, 80px);
+  // Vertical rhythm. sm = supporting blocks, md = standard sections, lg = feature sections,
+  // xl = hero-scale, page = inner-page content. Mobile 40-64, tablet 56-96, desktop 64-120.
+  --section-space-sm: 40px;
+  --section-space-md: 48px;
+  --section-space-lg: 56px;
+  --section-space-xl: 64px;
+  --section-space-page: 48px;
+  --section-y: var(--section-space-page);
   --gutter: clamp(16px, 4.1vw, 48px);
 
   // Shape + elevation
@@ -85,4 +93,24 @@
   --container-wide: #{t.$container-wide};
   --container-narrow: #{t.$container-narrow};
   --header-h: 72px;
+}
+
+@include m.up(md) {
+  :root {
+    --section-space-sm: 64px;
+    --section-space-md: 72px;
+    --section-space-lg: 80px;
+    --section-space-xl: 96px;
+    --section-space-page: 64px;
+  }
+}
+
+@include m.up(lg) {
+  :root {
+    --section-space-sm: clamp(64px, 1.9vw + 44px, 80px);
+    --section-space-md: clamp(88px, 3.85vw + 48px, 104px);
+    --section-space-lg: clamp(104px, 3.85vw + 64px, 120px);
+    --section-space-xl: 120px;
+    --section-space-page: clamp(72px, 3.85vw + 33px, 96px);
+  }
 }

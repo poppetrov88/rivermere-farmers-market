@@ -16,6 +16,7 @@ $rivermere_includes = array(
 	'theme-setup',
 	'assets',
 	'navigation',
+	'breadcrumbs',
 	'acf-fields',
 	'acf-options',
 	'template-functions',

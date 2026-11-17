@@ -12,6 +12,9 @@
 
 .section {
   padding-block: var(--section-y);
+
+  // Consecutive plain sections share one gap instead of stacking two paddings.
+  &--flow + &--flow { padding-top: 0; }
 }
 
 .site-main {
@@ -21,7 +24,7 @@
 
 .section-heading {
   position: relative;
-  margin-bottom: var(--sp-6);
+  margin-bottom: var(--sp-7);
   padding-bottom: var(--sp-4);
   text-align: center;
   font-size: var(--fs-h2);
@@ -45,7 +48,7 @@
 }
 
 .page-header {
-  padding-block: var(--sp-8) var(--sp-6);
+  padding-block: var(--sp-7) var(--sp-8);
   background: linear-gradient(180deg, var(--c-leaf-100), var(--c-bg));
   border-bottom: 1px solid var(--c-border);
 
@@ -86,16 +89,6 @@
   flex-wrap: wrap;
   gap: var(--sp-2);
   margin-block: var(--sp-4);
-}
-
-.breadcrumbs {
-  margin-bottom: var(--sp-4);
-  font-size: var(--fs-small);
-  color: var(--c-text-soft);
-
-  &__list { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
-  &__list li + li::before { content: '/'; margin-right: var(--sp-2); }
-  a { text-decoration: none; &:hover { text-decoration: underline; } }
 }
 
 .pagination {

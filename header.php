@@ -29,3 +29,5 @@ defined( 'ABSPATH' ) || exit;
 </header>
 
 <?php get_template_part( 'template-parts/header/search-overlay' ); ?>
+
+<?php rivermere_breadcrumbs(); ?>

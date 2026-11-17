@@ -2,7 +2,7 @@
 
 // ---------- Product categories ----------
 .section--categories {
-  padding-block: var(--sp-6) var(--sp-5);
+  padding-block: var(--section-space-md) var(--section-space-sm);
   background: #faf6eb;
 }
 
@@ -41,7 +41,7 @@
 }
 
 // ---------- Image + text ----------
-.section--image-text { padding-block: var(--sp-5) var(--sp-4); }
+.section--image-text { padding-block: var(--section-space-sm) var(--section-space-md); }
 
 .image-text {
   &__grid {
@@ -108,7 +108,7 @@
 }
 
 // ---------- Event banner ----------
-.section--event { padding-block: var(--sp-3) var(--sp-4); }
+.section--event { padding-block: var(--section-space-sm); }
 
 .event-banner {
   position: relative;
@@ -172,7 +172,7 @@
 }
 
 // ---------- Vendors ----------
-.section--vendors { padding-block: var(--sp-4) var(--sp-8); }
+.section--vendors { padding-block: var(--section-space-md); }
 
 // ---------- CTA ----------
 .cta-block {

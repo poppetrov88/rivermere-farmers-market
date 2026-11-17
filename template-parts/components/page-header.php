@@ -13,7 +13,6 @@ $text    = isset( $args['text'] ) ? $args['text'] : '';
 ?>
 <header class="page-header">
 	<div class="container">
-		<?php rivermere_breadcrumbs(); ?>
 		<?php if ( $eyebrow ) : ?>
 			<p class="eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
 		<?php endif; ?>

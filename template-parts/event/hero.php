@@ -21,7 +21,6 @@ $badge = array(
 ?>
 <header class="event-hero">
 	<div class="container">
-		<?php rivermere_breadcrumbs(); ?>
 		<a class="event-hero__back" href="<?php echo esc_url( get_post_type_archive_link( 'rm_event' ) ); ?>">
 			<?php echo rivermere_icon( 'arrow', 'event-hero__back-icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<?php esc_html_e( 'Back to all events', 'rivermere-market' ); ?>

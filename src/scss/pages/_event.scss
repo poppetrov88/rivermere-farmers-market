@@ -2,7 +2,7 @@
 
 // ---------- Event hero ----------
 .event-hero {
-  padding-block: var(--sp-6) var(--sp-8);
+  padding-block: var(--sp-7) var(--section-space-sm);
   background: linear-gradient(180deg, var(--c-leaf-100), var(--c-bg));
   border-bottom: 1px solid var(--c-border);
 
@@ -52,21 +52,22 @@
 // ---------- Two-column layout ----------
 .event-layout {
   display: grid;
-  gap: var(--sp-8);
-  padding-block: var(--sp-8);
+  gap: var(--sp-9);
+  padding-block: var(--section-space-page);
 
   @include m.up(lg) {
     grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
     align-items: start;
-    gap: var(--sp-9);
-    padding-block: var(--sp-9);
+    gap: var(--section-space-sm);
   }
 }
 
 .event-main {
   min-width: 0;
 
-  > * + * { margin-top: var(--sp-8); }
+  > * + * { margin-top: var(--sp-9); }
+
+  @include m.up(lg) { > * + * { margin-top: var(--section-space-sm); } }
 }
 
 .event-content {
@@ -274,7 +275,7 @@
 
 .vendor-grid--compact { grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
 
-.section--related { padding-block: 0 var(--sp-8); }
+.section--related { padding-block: 0 var(--section-space-page); }
 
 .event-grid {
   display: grid;
@@ -323,4 +324,4 @@
 
 .cta-block__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-3); }
 
-.event-cta { padding-top: 0; }
+.event-cta { padding-top: 0; padding-bottom: var(--section-space-page); }

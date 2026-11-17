@@ -20,7 +20,7 @@ if ( ! $heading ) {
 }
 $uid = 'imgtxt-' . wp_unique_id();
 ?>
-<section class="section section--image-text image-text image-text--<?php echo esc_attr( 'right' === $position ? 'right' : 'left' ); ?>" aria-labelledby="<?php echo esc_attr( $uid ); ?>">
+<section class="section section--flow section--image-text image-text image-text--<?php echo esc_attr( 'right' === $position ? 'right' : 'left' ); ?>" aria-labelledby="<?php echo esc_attr( $uid ); ?>">
 	<div class="container image-text__grid">
 		<?php if ( ! empty( $image['ID'] ) ) : ?>
 			<div class="image-text__media">

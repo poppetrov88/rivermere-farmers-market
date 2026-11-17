@@ -223,3 +223,12 @@
 @include m.reduced-motion {
   .search-overlay { transition: none; }
 }
+
+// Very small phones (320–479px): keep brand + actions on one row without overflow.
+@include m.down(sm) {
+  .site-header__inner { gap: var(--sp-3); }
+  .brand { gap: var(--sp-2); min-width: 0; }
+  .brand__mark { width: 44px; height: 44px; }
+  .brand__name { font-size: 1.0625rem; }
+  .site-header__actions { gap: var(--sp-1); }
+}

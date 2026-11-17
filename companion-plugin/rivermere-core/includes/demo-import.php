@@ -378,6 +378,20 @@ function rivermere_demo_import() {
 		$log = array_merge( $log, rivermere_demo_legal() );
 	}
 
+	// Rank Math breadcrumbs: the theme's breadcrumb bar uses Rank Math when this module is on.
+	// Only switched on when it is still at its default (off); explicit choices are never overridden.
+	$rm_general = get_option( 'rank-math-options-general' );
+	if ( is_array( $rm_general ) && 'on' !== ( $rm_general['breadcrumbs'] ?? 'off' ) ) {
+		$rm_general['breadcrumbs']               = 'on';
+		$rm_general['breadcrumbs_separator']     = '/';
+		$rm_general['breadcrumbs_home']          = 'on';
+		$rm_general['breadcrumbs_home_label']    = 'Home';
+		$rm_general['breadcrumbs_search_format'] = 'Search Results';
+		$rm_general['breadcrumbs_404_label']     = 'Page not found';
+		update_option( 'rank-math-options-general', $rm_general );
+		$log[] = 'Enabled Rank Math breadcrumbs';
+	}
+
 	// 5. Front page setting (only if no front page is configured yet).
 	if ( $home && 'posts' === get_option( 'show_on_front' ) ) {
 		update_option( 'show_on_front', 'page' );

@@ -1,0 +1,60 @@
+@use '../abstracts/mixins' as m;
+
+// Breadcrumb bar: one per inner page, aligned to the header container.
+.breadcrumbs-bar {
+  padding-block: var(--sp-4);
+  background: var(--c-leaf-100);
+  border-bottom: 1px solid var(--c-leaf-200);
+
+  @include m.up(lg) { padding-block: var(--sp-5); }
+}
+
+.breadcrumbs {
+  font-size: var(--fs-small);
+  line-height: 1.4;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-1) 0;
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+
+    // Chevron separator (CSS only, decorative).
+    + .breadcrumbs__item::before {
+      content: '';
+      flex: none;
+      width: 6px;
+      height: 6px;
+      margin-inline: var(--sp-3);
+      border-top: 1.5px solid var(--c-text-soft);
+      border-right: 1.5px solid var(--c-text-soft);
+      opacity: .7;
+      transform: rotate(45deg);
+    }
+  }
+
+  &__link {
+    padding-block: var(--sp-1);
+    color: var(--c-secondary-600);
+    font-weight: var(--fw-bold);
+    text-decoration: none;
+    background: linear-gradient(currentcolor, currentcolor) 0 100% / 0 1.5px no-repeat;
+    transition: background-size var(--t-base), color var(--t-base);
+
+    &:hover { color: var(--c-secondary-700); background-size: 100% 1.5px; }
+    &:focus-visible { border-radius: 4px; }
+  }
+
+  &__current {
+    padding-block: var(--sp-1);
+    overflow-wrap: anywhere;
+    color: var(--c-text);
+    font-weight: var(--fw-heavy);
+  }
+}

@@ -14,7 +14,7 @@ if ( ! $heading ) {
 $text = rivermere_sub( 'text' );
 $link = rivermere_sub( 'link', array() );
 ?>
-<section class="section section--cta" aria-labelledby="cta-title-<?php echo esc_attr( (string) get_row_index() ); ?>">
+<section class="section section--flow section--cta" aria-labelledby="cta-title-<?php echo esc_attr( (string) get_row_index() ); ?>">
 	<div class="container">
 		<div class="cta-block">
 			<h2 class="cta-block__title" id="cta-title-<?php echo esc_attr( (string) get_row_index() ); ?>"><?php echo esc_html( $heading ); ?></h2>

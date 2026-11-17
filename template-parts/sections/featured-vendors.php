@@ -30,7 +30,7 @@ if ( empty( $vendors ) ) {
 	return;
 }
 ?>
-<section class="section section--vendors" aria-labelledby="vendors-title">
+<section class="section section--flow section--vendors" aria-labelledby="vendors-title">
 	<div class="container">
 		<h2 class="section-heading" id="vendors-title"><?php echo esc_html( $heading ); ?></h2>
 		<ul class="vendor-grid">

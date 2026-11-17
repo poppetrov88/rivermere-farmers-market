@@ -32,7 +32,7 @@ $start    = $times['start'];
 $end      = $times['end'];
 $time_fmt = get_option( 'time_format' );
 ?>
-<section class="section section--event" aria-labelledby="event-banner-title">
+<section class="section section--flow section--event" aria-labelledby="event-banner-title">
 	<div class="container">
 		<article class="event-banner">
 			<?php if ( $thumb ) : ?>

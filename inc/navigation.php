@@ -63,35 +63,3 @@ function rivermere_menu_link_atts( $atts, $item ) {
 	return $atts;
 }
 add_filter( 'nav_menu_link_attributes', 'rivermere_menu_link_atts', 10, 2 );
-
-/**
- * Breadcrumbs: defer to Rank Math when active, otherwise a minimal trail.
- */
-function rivermere_breadcrumbs() {
-	if ( is_front_page() ) {
-		return;
-	}
-	if ( function_exists( 'rank_math_the_breadcrumbs' ) ) {
-		echo '<nav class="breadcrumbs" aria-label="' . esc_attr__( 'Breadcrumbs', 'rivermere-market' ) . '">';
-		rank_math_the_breadcrumbs();
-		echo '</nav>';
-		return;
-	}
-	$trail = array( '<a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'rivermere-market' ) . '</a>' );
-	if ( is_singular() ) {
-		$type = get_post_type_object( get_post_type() );
-		if ( $type && $type->has_archive ) {
-			$trail[] = '<a href="' . esc_url( get_post_type_archive_link( $type->name ) ) . '">' . esc_html( $type->labels->name ) . '</a>';
-		}
-		$trail[] = '<span aria-current="page">' . esc_html( get_the_title() ) . '</span>';
-	} elseif ( is_search() ) {
-		$trail[] = '<span aria-current="page">' . esc_html__( 'Search', 'rivermere-market' ) . '</span>';
-	} elseif ( is_archive() ) {
-		$trail[] = '<span aria-current="page">' . esc_html( wp_strip_all_tags( get_the_archive_title() ) ) . '</span>';
-	}
-	echo '<nav class="breadcrumbs" aria-label="' . esc_attr__( 'Breadcrumbs', 'rivermere-market' ) . '"><ol class="breadcrumbs__list">';
-	foreach ( $trail as $crumb ) {
-		echo '<li>' . $crumb . '</li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
-	}
-	echo '</ol></nav>';
-}
