@@ -1,0 +1,15 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+.vscode/
+.idea/
+*.swp
+assets/css/main.css
+assets/css/*.map
+assets/js/main.js
+assets/js/*.map
+tools/out/
+companion-plugin/**/vendor/

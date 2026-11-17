@@ -1,0 +1,16 @@
+/*
+Theme Name: Rivermere Market
+Theme URI: https://github.com/poppetrov88/rivermere-farmers-market
+Author: Rivermere
+Description: A reusable, ACF Pro powered classic theme for farmers market websites. Compiled styles live in assets/css/; edit the SCSS sources in src/scss/.
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 7.1
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: rivermere-market
+Tags: custom-colors, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+*/
+
+/* All styles are compiled from src/scss/main.scss into assets/css/main.min.css. */

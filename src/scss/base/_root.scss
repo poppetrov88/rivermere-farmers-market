@@ -1,0 +1,87 @@
+@use '../abstracts/tokens' as t;
+@use 'sass:map';
+
+// Runtime-customisable tokens. Brand colours can be overridden from Theme Settings.
+@font-face {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('../fonts/nunito-var-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  // Brand palette (sampled from the design reference)
+  --c-primary-900: #053120; // hero / deep forest
+  --c-primary-800: #0e3e21;
+  --c-primary-700: #184126; // newsletter band
+  --c-primary-600: #1f5532; // event banner
+  --c-secondary-600: #1d6806; // action green
+  --c-secondary-700: #165205;
+  --c-accent-400: #fdd13f; // yellow
+  --c-accent-500: #f0bd1c;
+  --c-leaf-100: #eff2d7;
+  --c-leaf-200: #e1e8bd;
+
+  // Neutrals
+  --c-bg: #fbf8ee;
+  --c-surface: #fff;
+  --c-surface-alt: #fffdf6;
+  --c-text: #10331f;
+  --c-text-soft: #4a5c4f;
+  --c-text-on-dark: #fff;
+  --c-border: #e4e1d1;
+  --c-focus: #1a73e8;
+  --c-danger: #b3261e;
+  --c-success: #17692f;
+
+  // Typography
+  --font-sans: nunito, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', arial, sans-serif;
+  --fw-regular: 400;
+  --fw-medium: 600;
+  --fw-bold: 700;
+  --fw-heavy: 800;
+  --lh-tight: 1.08;
+  --lh-snug: 1.25;
+  --lh-body: 1.6;
+  --ls-wide: .1em;
+
+  --fs-display: clamp(2.5rem, 1.6rem + 3.6vw, 3.875rem); // ~62px @1440
+  --fs-h1: clamp(2.125rem, 1.6rem + 2.2vw, 3rem);
+  --fs-h2: clamp(1.5rem, .85rem + 1.7vw, 2.4rem);
+  --fs-h3: clamp(1.125rem, 1.05rem + .35vw, 1.375rem);
+  --fs-lead: clamp(1.0625rem, 1rem + .3vw, 1.25rem);
+  --fs-body: 1rem;
+  --fs-small: .875rem;
+  --fs-caption: .75rem;
+
+  // Spacing scale
+  @each $key, $value in t.$spacing {
+    --sp-#{$key}: #{$value};
+  }
+
+  --section-y: clamp(48px, 3rem + 2.5vw, 80px);
+  --gutter: clamp(16px, 4.1vw, 48px);
+
+  // Shape + elevation
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-btn: 999px;
+  --shadow-sm: 0 1px 3px rgb(16 51 31 / 8%);
+  --shadow-md: 0 6px 20px rgb(16 51 31 / 10%);
+  --shadow-lg: 0 18px 48px rgb(16 51 31 / 18%);
+
+  // Motion
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --t-fast: .15s var(--ease);
+  --t-base: .25s var(--ease);
+
+  // Layout
+  --container: #{t.$container};
+  --container-wide: #{t.$container-wide};
+  --container-narrow: #{t.$container-narrow};
+  --header-h: 72px;
+}

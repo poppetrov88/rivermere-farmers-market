@@ -1,0 +1,30 @@
+{
+  "name": "rivermere-market",
+  "version": "1.0.0",
+  "description": "Rivermere Market - reusable WordPress theme for farmers markets",
+  "private": true,
+  "type": "module",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "dev": "npm-run-all --parallel watch:css watch:js",
+    "watch:css": "sass src/scss/main.scss assets/css/main.css --watch --embed-source-map",
+    "watch:js": "esbuild src/js/main.js --bundle --outfile=assets/js/main.js --sourcemap --watch",
+    "build:css": "sass src/scss/main.scss assets/css/main.min.css --style=compressed --no-source-map",
+    "build:js": "esbuild src/js/main.js --bundle --minify --target=es2019 --outfile=assets/js/main.min.js",
+    "build": "npm run build:css && npm run build:js",
+    "lint:css": "stylelint \"src/scss/**/*.scss\"",
+    "lint:js": "eslint src/js",
+    "lint": "npm run lint:css && npm run lint:js",
+    "images": "node tools/make-images.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "eslint": "^9.0.0",
+    "npm-run-all": "^4.1.5",
+    "puppeteer-core": "^24.0.0",
+    "sass": "^1.80.0",
+    "sharp": "^0.34.0",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard-scss": "^14.0.0"
+  }
+}

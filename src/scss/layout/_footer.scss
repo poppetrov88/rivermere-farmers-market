@@ -1,0 +1,151 @@
+@use '../abstracts/mixins' as m;
+
+// ---------- Newsletter band ----------
+.newsletter {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--sp-6);
+  background:
+    radial-gradient(120% 140% at 50% 130%, #2a5f2b 0%, transparent 60%),
+    linear-gradient(180deg, #184126, #17401f);
+  color: #fff;
+
+  &__leaves {
+    position: absolute;
+    bottom: -30px;
+    width: clamp(90px, 14vw, 190px);
+    color: #3d7d2e;
+    opacity: .85;
+    pointer-events: none;
+
+    &--left { left: -20px; transform: rotate(-12deg); }
+    &--right { right: -20px; transform: scaleX(-1) rotate(-8deg); }
+  }
+
+  &__inner {
+    position: relative;
+    display: grid;
+    gap: var(--sp-5);
+    align-items: center;
+
+    @include m.up(lg) { grid-template-columns: 1fr 1.05fr; gap: var(--sp-8); }
+  }
+
+  &__intro { display: flex; align-items: center; gap: var(--sp-5); font-size: .875rem; line-height: 1.4; }
+  &__icon { width: 52px; height: 52px; color: var(--c-accent-400); stroke-width: 1.4; }
+  &__title { color: #fff; font-size: 1.75rem; line-height: 1.1; margin-bottom: 4px; }
+
+  &__field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: 5px 5px 5px var(--sp-4);
+    background: #fff;
+    border-radius: var(--radius-btn);
+
+    input {
+      flex: 1;
+      min-width: 0;
+      min-height: 40px;
+      padding: 0;
+      background: transparent;
+      color: var(--c-text);
+      border: 0;
+      font-size: .875rem;
+
+      &:focus-visible { outline: none; }
+      &::placeholder { color: #5a655e; }
+    }
+
+    &:focus-within { box-shadow: 0 0 0 3px var(--c-accent-400); }
+    &[data-invalid='true'] { box-shadow: 0 0 0 3px #ff8c82; }
+  }
+
+  &__field-icon { width: 20px; height: 20px; color: #5a655e; }
+
+  &__consent {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    margin-top: var(--sp-3);
+    font-size: .8125rem;
+    line-height: 1.4;
+
+    input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--c-accent-400); }
+    a { color: var(--c-accent-400); }
+  }
+
+  &__status {
+    min-height: 1.4em;
+    margin-top: var(--sp-2);
+    font-size: .875rem;
+    font-weight: var(--fw-bold);
+
+    &[data-state='success'] { color: #b9f3a6; }
+    &[data-state='error'] { color: #ffb4ab; }
+  }
+}
+
+// ---------- Footer proper ----------
+.footer-main {
+  padding-block: var(--sp-7) var(--sp-5);
+  background: #0b2416;
+  color: rgb(255 255 255 / 88%);
+
+  &__grid {
+    display: grid;
+    gap: var(--sp-7);
+
+    @include m.up(md) { grid-template-columns: 1.4fr 1fr 1.2fr; gap: var(--sp-8); }
+  }
+
+  a { color: #fff; }
+}
+
+.footer-brand__desc { margin-block: var(--sp-4); max-width: 38ch; font-size: .9375rem; }
+
+.footer-title {
+  margin-bottom: var(--sp-4);
+  color: var(--c-accent-400);
+  font-size: .8125rem;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+}
+
+.footer-nav .menu { display: grid; gap: var(--sp-2); a { text-decoration: none; &:hover { text-decoration: underline; } } }
+
+.footer-contact {
+  address p { display: flex; gap: var(--sp-3); margin-bottom: var(--sp-3); font-size: .9375rem; }
+  .icon { width: 20px; height: 20px; margin-top: 3px; color: var(--c-accent-400); }
+}
+
+.social-list {
+  display: flex;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+
+  &__link {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid rgb(255 255 255 / 40%);
+    border-radius: 50%;
+    transition: background-color var(--t-base), color var(--t-base);
+
+    &:hover { background: var(--c-accent-400); color: var(--c-primary-900); border-color: var(--c-accent-400); }
+    .icon { margin: 0; color: currentcolor; }
+  }
+}
+
+.footer-bottom {
+  padding-block: var(--sp-4);
+  background: #07180f;
+  color: rgb(255 255 255 / 75%);
+  font-size: var(--fs-small);
+
+  &__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-3); }
+  .menu { display: flex; gap: var(--sp-5); }
+  a { color: #fff; }
+}
