@@ -37,6 +37,10 @@ get_header();
 			<?php get_template_part( 'template-parts/content/none' ); ?>
 		<?php endif; ?>
 	</div>
+	<?php rivermere_render_faq(); ?>
+	<?php if ( is_post_type_archive( 'rm_vendor' ) ) : ?>
+		<?php get_template_part( 'template-parts/components/vendor-cta' ); ?>
+	<?php endif; ?>
 </main>
 <?php
 get_footer();

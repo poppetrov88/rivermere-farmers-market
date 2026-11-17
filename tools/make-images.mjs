@@ -7,6 +7,7 @@ const OUT = 'assets/images/';
 const crops = {
 	'placeholder-hero': [448, 68, 576, 424],
 	'placeholder-community': [46, 714, 545, 309],
+	'placeholder-woman-crate': [560, 68, 464, 424],
 	'placeholder-event': [44, 1058, 206, 96],
 	'placeholder-vendor-produce': [42, 1247, 226, 86],
 	'placeholder-vendor-dairy': [282, 1247, 226, 86],

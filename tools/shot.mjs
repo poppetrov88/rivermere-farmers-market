@@ -9,6 +9,9 @@ page.on('pageerror', (e) => logs.push('pageerror: ' + e.message));
 page.on('requestfailed', (r) => logs.push('requestfailed: ' + r.url()));
 await page.setViewport({ width: +width, height: 900, deviceScaleFactor: 1 });
 await page.goto(url, { waitUntil: 'networkidle0' });
+// autoscroll: trigger lazy-loaded images before a full-page capture
+await page.evaluate(async () => { for (let y = 0; y < document.documentElement.scrollHeight; y += 600) { window.scrollTo({ top: y, behavior: 'instant' }); await new Promise((r) => setTimeout(r, 60)); } window.scrollTo({ top: 0, behavior: 'instant' }); });
+await new Promise((r) => setTimeout(r, 400));
 await page.screenshot({ path: out, fullPage: full === '1' });
 console.log('overflow:', await page.evaluate(() => document.documentElement.scrollWidth > innerWidth));
 console.log('height:', await page.evaluate(() => document.documentElement.scrollHeight));

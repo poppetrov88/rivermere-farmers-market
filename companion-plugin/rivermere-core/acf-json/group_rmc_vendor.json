@@ -203,6 +203,89 @@
             },
             "default_value": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_rm_tab_vfaq_faq",
+            "label": "FAQ",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_rm_vfaq_vendor_faqs",
+            "label": "Vendor FAQ (optional)",
+            "name": "vendor_faqs",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Optional. If empty, the global Vendors FAQ (Theme Settings → FAQs) is shown.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "button_label": "Add question",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_rm_vfaq_vendor_faqs_question",
+                    "label": "Question",
+                    "name": "question",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_rm_vfaq_vendor_faqs"
+                },
+                {
+                    "key": "field_rm_vfaq_vendor_faqs_answer",
+                    "label": "Answer",
+                    "name": "answer",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 4,
+                    "new_lines": "wpautop",
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_rm_vfaq_vendor_faqs"
+                }
+            ]
         }
     ],
     "location": [
@@ -226,6 +309,6 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1794950218,
+    "modified": 1794952285,
     "local_file": "D:Projectsrivermere-farmers-market-wpcompanion-pluginrivermere-core\/acf-json\/group_rmc_vendor.json"
 }

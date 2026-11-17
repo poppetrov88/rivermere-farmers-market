@@ -1,0 +1,282 @@
+@use '../abstracts/mixins' as m;
+
+// ---------- Landing hero (Become a Vendor, About Us) ----------
+.landing-hero {
+  padding-block: var(--section-space-sm) var(--section-space-md);
+  background: linear-gradient(180deg, var(--c-leaf-100), var(--c-bg));
+
+  &__grid {
+    display: grid;
+    gap: var(--sp-7);
+    align-items: center;
+
+    @include m.up(lg) { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: var(--sp-9); }
+  }
+
+  &__text { max-width: 600px; }
+
+  &__title {
+    font-size: clamp(2.125rem, 1.3rem + 3vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+  }
+
+  &__intro { margin-top: var(--sp-5); max-width: 54ch; font-size: var(--fs-lead); line-height: 1.55; color: var(--c-text-soft); }
+  &__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-6); }
+
+  &__media {
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+  }
+
+  &__img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+}
+
+// ---------- Feature sections + cards ----------
+.feature-section {
+  padding-block: var(--section-space-md);
+
+  &__head { max-width: 680px; margin: 0 auto var(--sp-8); text-align: center; .eyebrow { justify-content: center; } }
+  &__title { font-size: var(--fs-h2); }
+  &__intro { margin-top: var(--sp-3); color: var(--c-text-soft); font-size: var(--fs-lead); }
+}
+
+// Tinted band: keeps its own top padding (specificity beats the shared-gap rule).
+.section.feature-section--alt {
+  padding-block: var(--section-space-md);
+  background: var(--c-leaf-100);
+}
+
+.feature-grid {
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: 1fr;
+
+  @include m.up(md) { grid-template-columns: repeat(2, 1fr); }
+  @include m.up(lg) {
+    &--3 { grid-template-columns: repeat(3, 1fr); }
+    &--4 { grid-template-columns: repeat(4, 1fr); }
+  }
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-6);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
+
+  &:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--c-secondary-600); }
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    background: var(--c-leaf-100);
+    border-radius: 16px;
+    color: var(--c-secondary-600);
+
+    .icon { width: 26px; height: 26px; }
+  }
+
+  &__title { font-size: 1.25rem; }
+  &__text { color: var(--c-text-soft); font-size: .9375rem; }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-top: auto;
+    color: var(--c-secondary-600);
+    font-weight: var(--fw-heavy);
+    text-decoration: none;
+
+    .icon { width: 18px; height: 18px; transition: transform var(--t-base); }
+    &:hover .icon { transform: translateX(3px); }
+  }
+}
+
+// ---------- Steps ----------
+.steps {
+  display: grid;
+  gap: var(--sp-5);
+  counter-reset: step;
+
+  @include m.up(md) { grid-template-columns: repeat(2, 1fr); }
+  @include m.up(lg) { grid-template-columns: repeat(4, 1fr); }
+
+  &__item {
+    position: relative;
+    padding: var(--sp-6) var(--sp-5) var(--sp-5);
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+
+    p { margin-top: var(--sp-2); color: var(--c-text-soft); font-size: .9375rem; }
+  }
+
+  &__num {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: var(--sp-4);
+    background: var(--c-secondary-600);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: var(--fw-heavy);
+  }
+
+  &__title { font-size: 1.125rem; }
+}
+
+// ---------- Requirements ----------
+.req-list {
+  display: grid;
+  gap: var(--sp-4);
+
+  &__item {
+    display: flex;
+    gap: var(--sp-4);
+    padding: var(--sp-5);
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+
+    p { margin-top: 2px; color: var(--c-text-soft); font-size: .9375rem; }
+  }
+
+  &__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    background: var(--c-leaf-100);
+    border-radius: 50%;
+    color: var(--c-secondary-600);
+
+    .icon { width: 18px; height: 18px; stroke-width: 2.6; }
+  }
+
+  &__title { font-size: 1.0625rem; }
+}
+
+.req-note { margin-top: var(--sp-5); &__title { font-size: 1.0625rem; margin-bottom: var(--sp-2); } }
+
+// ---------- Application form ----------
+// Band sections keep their own top padding (higher specificity than the shared-gap rule).
+.section.apply-section { padding-block: var(--section-space-md); background: var(--c-leaf-100); }
+
+.apply-form {
+  display: grid;
+  gap: var(--sp-6);
+  padding: var(--sp-6);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+
+  @include m.up(md) { padding: var(--sp-8); }
+
+  &__note { color: var(--c-text-soft); font-size: var(--fs-small); }
+
+  &__group {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    legend {
+      margin-bottom: var(--sp-4);
+      padding: 0;
+      color: var(--c-secondary-600);
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-heavy);
+      letter-spacing: var(--ls-wide);
+      text-transform: uppercase;
+    }
+  }
+
+  &__terms { margin-bottom: var(--sp-4); color: var(--c-text-soft); font-size: .9375rem; }
+
+  &__summary { &-title { margin-bottom: var(--sp-2); font-size: 1rem; } ul { display: grid; gap: var(--sp-1); padding-left: 1.2em; list-style: disc; } a { color: var(--c-danger); font-weight: var(--fw-bold); } }
+
+  &__submit { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-4); }
+  &__status { font-weight: var(--fw-bold); color: var(--c-text-soft); &.is-error { color: var(--c-danger); } }
+}
+
+.field-row {
+  display: grid;
+  gap: var(--sp-5) var(--sp-5);
+  grid-template-columns: 1fr;
+
+  @include m.up(md) { grid-template-columns: repeat(2, 1fr); }
+}
+
+.field {
+  min-width: 0;
+  grid-column: 1 / -1;
+
+  &--half { @include m.up(md) { grid-column: auto; } }
+
+  &__label { display: block; margin-bottom: var(--sp-2); font-weight: var(--fw-heavy); font-size: .9375rem; }
+  &__req { color: var(--c-danger); margin-left: 2px; }
+  &__opt { margin-left: var(--sp-1); color: var(--c-text-soft); font-weight: var(--fw-regular); font-size: var(--fs-small); }
+
+  &__control {
+    width: 100%;
+    min-height: 48px;
+    padding: var(--sp-3) var(--sp-4);
+    background: #fff;
+    border: 1.5px solid #b9b6a4;
+    border-radius: var(--radius-sm);
+    color: var(--c-text);
+    transition: border-color var(--t-base), box-shadow var(--t-base);
+
+    &:hover { border-color: var(--c-secondary-600); }
+    &:focus-visible { outline: none; border-color: var(--c-secondary-600); box-shadow: 0 0 0 3px rgb(29 104 6 / 25%); }
+    &[aria-invalid='true'] { border-color: var(--c-danger); box-shadow: 0 0 0 3px rgb(179 38 30 / 15%); }
+  }
+
+  textarea.field__control { min-height: 112px; resize: vertical; }
+
+  &__hint { margin-top: var(--sp-1); color: var(--c-text-soft); font-size: var(--fs-small); }
+  &__error { margin-top: var(--sp-1); color: var(--c-danger); font-size: var(--fs-small); font-weight: var(--fw-bold); &[hidden] { display: none; } }
+
+  &--check { position: relative; margin-top: var(--sp-2); }
+  &--check .check__input { top: 12px; }
+}
+
+.apply-success {
+  padding: var(--sp-8) var(--sp-6);
+  background: var(--c-surface);
+  border: 1px solid var(--c-secondary-600);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+
+  &[hidden] { display: none; }
+  p { max-width: 48ch; margin: var(--sp-3) auto 0; color: var(--c-text-soft); }
+
+  &__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: var(--sp-4);
+    background: var(--c-secondary-600);
+    border-radius: 50%;
+    color: #fff;
+
+    .icon { width: 32px; height: 32px; stroke-width: 2.6; }
+  }
+}

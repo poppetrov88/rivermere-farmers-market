@@ -32,7 +32,7 @@ get_header();
 				<?php get_template_part( 'template-parts/event/accessibility', null, array( 'ev' => $ev ) ); ?>
 				<?php get_template_part( 'template-parts/event/vendors', null, array( 'ev' => $ev ) ); ?>
 				<?php get_template_part( 'template-parts/event/gallery', null, array( 'ev' => $ev ) ); ?>
-				<?php get_template_part( 'template-parts/event/faq', null, array( 'ev' => $ev ) ); ?>
+				<?php rivermere_render_faq( array( 'contained' => false ) ); ?>
 			</article>
 
 			<?php get_template_part( 'template-parts/event/sidebar', null, array( 'ev' => $ev ) ); ?>

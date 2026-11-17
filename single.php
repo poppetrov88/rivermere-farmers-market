@@ -37,6 +37,10 @@ get_header();
 		<?php
 	endwhile;
 	?>
+	<?php rivermere_render_faq(); ?>
+	<?php if ( is_singular( 'rm_vendor' ) ) : ?>
+		<?php get_template_part( 'template-parts/components/vendor-cta' ); ?>
+	<?php endif; ?>
 </main>
 <?php
 get_footer();

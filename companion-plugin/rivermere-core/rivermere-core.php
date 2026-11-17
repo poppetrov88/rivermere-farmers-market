@@ -21,12 +21,14 @@ define( 'RIVERMERE_CORE_DIR', plugin_dir_path( __FILE__ ) );
 require_once RIVERMERE_CORE_DIR . 'includes/post-types.php';
 require_once RIVERMERE_CORE_DIR . 'includes/acf-cpt-fields.php';
 require_once RIVERMERE_CORE_DIR . 'includes/event-ics.php';
+require_once RIVERMERE_CORE_DIR . 'includes/vendor-applications.php';
 require_once RIVERMERE_CORE_DIR . 'includes/newsletter.php';
 require_once RIVERMERE_CORE_DIR . 'includes/newsletter-admin.php';
 require_once RIVERMERE_CORE_DIR . 'includes/seo-integration.php';
 require_once RIVERMERE_CORE_DIR . 'includes/demo-import.php';
 require_once RIVERMERE_CORE_DIR . 'includes/demo-legal.php';
 require_once RIVERMERE_CORE_DIR . 'includes/demo-event.php';
+require_once RIVERMERE_CORE_DIR . 'includes/demo-phase4.php';
 
 /**
  * Activation: create tables and flush rewrite rules once post types exist.

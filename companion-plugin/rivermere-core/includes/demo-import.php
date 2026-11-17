@@ -82,6 +82,12 @@ function rivermere_demo_image_meta() {
 			'caption'     => '',
 			'description' => 'A smiling market vendor in a straw hat and green apron holds a wooden crate of fresh produce, with market tents and shoppers blurred in the background.' . $note,
 		),
+		'placeholder-woman-crate.webp'     => array(
+			'title'       => 'Vendor holding a crate of fresh vegetables',
+			'alt'         => 'Smiling woman in a straw hat holding a wooden crate of lettuce, carrots, radishes and tomatoes',
+			'caption'     => '',
+			'description' => 'A smiling market vendor in a straw hat holds a wooden crate of fresh produce. Tighter crop of the hero placeholder.' . $note,
+		),
 		'placeholder-community.webp'       => array(
 			'title'       => 'Shoppers and stalls beside a Farmers Market chalkboard sign',
 			'alt'         => 'Shoppers walking between white-canopy market stalls, with sunflowers and a chalkboard sign reading Farmers Market, This Sunday, 9 AM to 1 PM',
@@ -390,6 +396,11 @@ function rivermere_demo_import() {
 		$rm_general['breadcrumbs_404_label']     = 'Page not found';
 		update_option( 'rank-math-options-general', $rm_general );
 		$log[] = 'Enabled Rank Math breadcrumbs';
+	}
+
+	// Phase 4+: FAQs, Become a Vendor, About Us, CTAs.
+	if ( function_exists( 'rivermere_demo_phase4' ) ) {
+		$log = array_merge( $log, rivermere_demo_phase4() );
 	}
 
 	// 5. Front page setting (only if no front page is configured yet).

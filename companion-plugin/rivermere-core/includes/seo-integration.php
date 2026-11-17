@@ -23,6 +23,7 @@ function rivermere_seo_settings() {
 	$defaults = array(
 		'default_image' => '',
 		'org_name'      => '',
+		'description'   => '',
 		'telephone'     => '',
 		'email'         => '',
 		'street'        => '',
@@ -54,6 +55,7 @@ function rivermere_seo_sanitize( $input ) {
 	foreach ( $text as $key ) {
 		$out[ $key ] = isset( $input[ $key ] ) ? sanitize_text_field( $input[ $key ] ) : '';
 	}
+	$out['description']   = isset( $input['description'] ) ? sanitize_textarea_field( $input['description'] ) : '';
 	$out['email']         = isset( $input['email'] ) ? sanitize_email( $input['email'] ) : '';
 	$out['default_image'] = isset( $input['default_image'] ) ? esc_url_raw( $input['default_image'] ) : '';
 	$out['lat']           = isset( $input['lat'] ) && is_numeric( $input['lat'] ) && abs( (float) $input['lat'] ) <= 90 ? (string) (float) $input['lat'] : '';
@@ -132,6 +134,7 @@ function rivermere_seo_page() {
 				<?php
 				$row( 'default_image', __( 'Default social sharing image URL', 'rivermere-core' ), 'url', __( 'Used only when a page has no image of its own (1200×630 recommended). Copy the URL from the Media Library.', 'rivermere-core' ) );
 				$row( 'org_name', __( 'Market name', 'rivermere-core' ), 'text', __( 'Leave blank to keep the name set in Rank Math.', 'rivermere-core' ) );
+				$row( 'description', __( 'Business description', 'rivermere-core' ), 'textarea', __( 'One or two factual sentences about the market (added to the Organization entity if Rank Math has none).', 'rivermere-core' ) );
 				$row( 'telephone', __( 'Telephone', 'rivermere-core' ) );
 				$row( 'email', __( 'Contact email', 'rivermere-core' ), 'email' );
 				$row( 'price_range', __( 'Price range', 'rivermere-core' ), 'text', __( 'Optional, e.g. "$$". Leave blank if unsure.', 'rivermere-core' ) );
@@ -206,6 +209,48 @@ function rivermere_seo_jsonld( $data ) {
 	}
 	$o = rivermere_seo_settings();
 
+	// Make sure the core entities exist on every page type (Rank Math omits them on single CPT pages).
+	// Only added when missing, with the same @ids Rank Math uses, so nothing is ever duplicated.
+	if ( empty( $data['publisher'] ) ) {
+		$titles = (array) get_option( 'rank-math-options-titles', array() );
+		$data['publisher'] = array(
+			'@type' => 'Organization',
+			'@id'   => home_url( '/#organization' ),
+			'name'  => ! empty( $titles['knowledgegraph_name'] ) ? $titles['knowledgegraph_name'] : get_bloginfo( 'name' ),
+			'url'   => home_url( '/' ),
+		);
+	}
+	if ( empty( $data['WebSite'] ) ) {
+		$data['WebSite'] = array(
+			'@type'           => 'WebSite',
+			'@id'             => home_url( '/#website' ),
+			'url'             => home_url(),
+			'name'            => get_bloginfo( 'name' ),
+			'publisher'       => array( '@id' => $data['publisher']['@id'] ),
+			'inLanguage'      => get_bloginfo( 'language' ),
+			// The theme provides real WordPress search at /?s=.
+			'potentialAction' => array(
+				'@type'       => 'SearchAction',
+				'target'      => home_url( '/?s={search_term_string}' ),
+				'query-input' => 'required name=search_term_string',
+			),
+		);
+	}
+	if ( empty( $data['WebPage'] ) && is_singular() ) {
+		$permalink       = get_permalink( get_queried_object_id() );
+		$data['WebPage'] = array(
+			'@type'      => 'WebPage',
+			'@id'        => $permalink . '#webpage',
+			'url'        => $permalink,
+			'name'       => wp_get_document_title(),
+			'isPartOf'   => array( '@id' => $data['WebSite']['@id'] ),
+			'inLanguage' => get_bloginfo( 'language' ),
+		);
+		if ( ! empty( $data['BreadcrumbList']['@id'] ) ) {
+			$data['WebPage']['breadcrumb'] = array( '@id' => $data['BreadcrumbList']['@id'] );
+		}
+	}
+
 	// Organization / LocalBusiness enrichment (only fills gaps; never duplicates the entity).
 	if ( isset( $data['publisher'] ) && is_array( $data['publisher'] ) ) {
 		$pub = $data['publisher'];
@@ -255,7 +300,99 @@ function rivermere_seo_jsonld( $data ) {
 			}
 			$pub['@type'] = count( $types ) > 1 ? $types : $types[0];
 		}
+
+		// Reuse verified data already managed in Theme Settings (no second source of truth).
+		if ( function_exists( 'get_field' ) ) {
+			if ( empty( $pub['telephone'] ) && get_field( 'phone', 'option' ) ) {
+				$pub['telephone'] = (string) get_field( 'phone', 'option' );
+			}
+			if ( empty( $pub['email'] ) && is_email( (string) get_field( 'contact_email', 'option' ) ) ) {
+				$pub['email'] = (string) get_field( 'contact_email', 'option' );
+			}
+			$same = array();
+			foreach ( array( 'facebook_url', 'instagram_url', 'linkedin_url' ) as $field_name ) {
+				$url = esc_url_raw( (string) get_field( $field_name, 'option' ), array( 'http', 'https' ) );
+				if ( $url ) {
+					$same[] = $url;
+				}
+			}
+			if ( $same ) {
+				$pub['sameAs'] = array_values( array_unique( array_merge( isset( $pub['sameAs'] ) ? (array) $pub['sameAs'] : array(), $same ) ) );
+			}
+			if ( empty( $pub['openingHoursSpecification'] ) ) {
+				$spec = array();
+				foreach ( (array) get_field( 'opening_hours', 'option' ) as $row ) {
+					if ( ! empty( $row['days'] ) && ! empty( $row['opens'] ) && ! empty( $row['closes'] ) ) {
+						$spec[] = array(
+							'@type'     => 'OpeningHoursSpecification',
+							'dayOfWeek' => array_values( (array) $row['days'] ),
+							'opens'     => $row['opens'],
+							'closes'    => $row['closes'],
+						);
+					}
+				}
+				if ( $spec ) {
+					$pub['openingHoursSpecification'] = $spec;
+				}
+			}
+			if ( empty( $pub['logo'] ) ) {
+				$logo = get_field( 'site_logo', 'option' );
+				if ( ! empty( $logo['url'] ) ) {
+					$pub['logo'] = array(
+						'@type'  => 'ImageObject',
+						'url'    => esc_url_raw( $logo['url'] ),
+						'width'  => (int) ( $logo['width'] ?? 0 ),
+						'height' => (int) ( $logo['height'] ?? 0 ),
+					);
+				}
+			}
+		}
+		if ( $o['description'] && empty( $pub['description'] ) ) {
+			$pub['description'] = $o['description'];
+		}
 		$data['publisher'] = $pub;
+	}
+
+	// Page types: About page => AboutPage (Rank Math's WebPage entity keeps its @id, so references stay intact).
+	if ( isset( $data['WebPage'] ) && is_array( $data['WebPage'] ) && is_page_template( 'page-about.php' ) ) {
+		$data['WebPage']['@type'] = 'AboutPage';
+	}
+	if ( isset( $data['WebPage'] ) && is_array( $data['WebPage'] ) && is_singular( 'rm_event' ) ) {
+		$data['WebPage']['about'] = array( '@id' => get_permalink( get_queried_object_id() ) . '#event' );
+	}
+
+	// FAQPage: built from exactly the FAQ items rendered on the page (see theme inc/faq.php).
+	$faq_items = apply_filters( 'rivermere_current_faqs', array() );
+	if ( $faq_items && ! isset( $data['rivermere_faq'] ) ) {
+		$has_faq = false;
+		foreach ( $data as $entity ) {
+			if ( is_array( $entity ) && isset( $entity['@type'] ) && in_array( 'FAQPage', (array) $entity['@type'], true ) ) {
+				$has_faq = true; // Another source already provides it.
+			}
+		}
+		if ( ! $has_faq ) {
+			$entities = array();
+			foreach ( $faq_items as $item ) {
+				$entities[] = array(
+					'@type'          => 'Question',
+					'name'           => $item['q'],
+					'acceptedAnswer' => array(
+						'@type' => 'Answer',
+						'text'  => trim( wp_strip_all_tags( $item['a'] ) ),
+					),
+				);
+			}
+			$page_id = isset( $data['WebPage']['@id'] ) ? $data['WebPage']['@id'] : '';
+			$entity  = array(
+				'@type'      => 'FAQPage',
+				'@id'        => trailingslashit( get_permalink( get_queried_object_id() ) ? get_permalink( get_queried_object_id() ) : home_url( add_query_arg( array() ) ) ) . '#faq',
+				'mainEntity' => $entities,
+			);
+			if ( $page_id ) {
+				$entity['isPartOf'] = array( '@id' => $page_id );
+			}
+			$data['rivermere_faq'] = $entity;
+		}
 	}
 
 	// Event entity for single events, unless Rank Math's schema module already emitted one.
@@ -345,10 +482,7 @@ function rivermere_seo_event_entity( $post, $o, $data ) {
 	} elseif ( isset( $data['publisher']['@id'] ) ) {
 		$event['organizer'] = array( '@id' => $data['publisher']['@id'] );
 	}
-	$reg = get_post_meta( $post->ID, 'event_registration_url', true );
-	if ( $reg ) {
-		$event['offers'] = array( '@type' => 'Offer', 'url' => esc_url_raw( $reg ), 'availability' => 'https://schema.org/InStock' );
-	}
+	// No Offer is emitted: the site stores no ticket price/currency, and a registration link alone is not an offer.
 	return $event;
 }
 
@@ -387,3 +521,21 @@ function rivermere_seo_analytics() {
 	wp_add_inline_script( 'rivermere-main', 'window.rivermereAnalytics=' . wp_json_encode( array( 'id' => $o['ga4_id'] ) ) . ';', 'before' );
 }
 add_action( 'wp_enqueue_scripts', 'rivermere_seo_analytics', 30 );
+
+/**
+ * Final pass (after Rank Math's own graph merging at priority 99): About page = AboutPage
+ * (+ FAQPage when it has a visible FAQ). FAQPage and AboutPage are both WebPage subtypes.
+ *
+ * @param array $data JSON-LD graph.
+ * @return array
+ */
+function rivermere_seo_jsonld_final( $data ) {
+	if ( is_array( $data ) && ! empty( $data['WebPage'] ) && is_page_template( 'page-about.php' ) ) {
+		$types = array_diff( (array) $data['WebPage']['@type'], array( 'WebPage' ) );
+		array_unshift( $types, 'AboutPage' );
+		$types                    = array_values( array_unique( $types ) );
+		$data['WebPage']['@type'] = 1 === count( $types ) ? $types[0] : $types;
+	}
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'rivermere_seo_jsonld_final', 100 );

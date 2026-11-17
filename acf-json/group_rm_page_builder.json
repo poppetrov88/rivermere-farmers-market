@@ -883,6 +883,16 @@
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
+            },
+            {
+                "param": "page_template",
+                "operator": "!=",
+                "value": "page-become-a-vendor.php"
+            },
+            {
+                "param": "page_template",
+                "operator": "!=",
+                "value": "page-about.php"
             }
         ]
     ],
@@ -898,5 +908,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1794950195
+    "modified": 1794952283
 }

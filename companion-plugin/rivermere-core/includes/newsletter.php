@@ -194,6 +194,12 @@ function rivermere_newsletter_handle( WP_REST_Request $request ) {
 	$result = rivermere_newsletter_subscribe( $email );
 
 	if ( 'existing' !== $result['status'] ) {
+		/**
+		 * Fires once for a NEW or re-activated subscription (never for duplicates). No personal data.
+		 *
+		 * @param string $status 'new' or 'resubscribed'.
+		 */
+		do_action( 'rivermere_newsletter_subscribed', $result['status'] );
 		$site    = wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
 		$subject = sprintf( /* translators: %s: site name */ __( 'You’re subscribed to %s', 'rivermere-core' ), $site );
 		$body    = sprintf(

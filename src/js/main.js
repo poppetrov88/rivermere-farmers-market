@@ -5,6 +5,7 @@ import { initConsoleWelcome, initScrollProgress, initBackToTop, initComingSoon, 
 import { initLanguage } from './language.js';
 import { initContactWidget } from './contact.js';
 import { initConsent } from './consent.js';
+import { initVendorForm } from './vendor-form.js';
 
 const ready = (fn) => {
 	if (document.readyState === 'loading') {
@@ -26,4 +27,5 @@ ready(() => {
 	initLanguage();
 	initContactWidget();
 	initConsent();
+	initVendorForm();
 });

@@ -1035,6 +1035,504 @@
             "ui_off_text": ""
         },
         {
+            "key": "field_rm_tab_opt_faq",
+            "label": "FAQs",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_rm_faq_note",
+            "label": "About global FAQs",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Used as the default FAQ on the Vendors and Events pages. A single vendor or event can override it with its own FAQ. The About Us and Become a Vendor FAQs are edited on those pages.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_rm_faq_vendors_title",
+            "label": "Vendors FAQ heading",
+            "name": "faq_vendors_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Vendor questions answered",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_faq_vendors_intro",
+            "label": "Vendors FAQ introduction",
+            "name": "faq_vendors_intro",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 2,
+            "new_lines": "",
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rm_faq_vendors_items",
+            "label": "Global Vendors FAQ",
+            "name": "faq_vendors_items",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add, remove or drag to reorder. Rows with an empty question or answer are ignored. Only questions you actually answer on the page are published (and added to structured data).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "button_label": "Add question",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_rm_faq_vendors_items_question",
+                    "label": "Question",
+                    "name": "question",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_rm_faq_vendors_items"
+                },
+                {
+                    "key": "field_rm_faq_vendors_items_answer",
+                    "label": "Answer",
+                    "name": "answer",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 4,
+                    "new_lines": "wpautop",
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_rm_faq_vendors_items"
+                }
+            ]
+        },
+        {
+            "key": "field_rm_faq_events_title",
+            "label": "Events FAQ heading",
+            "name": "faq_events_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Event questions answered",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_faq_events_intro",
+            "label": "Events FAQ introduction",
+            "name": "faq_events_intro",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 2,
+            "new_lines": "",
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rm_faq_events_items",
+            "label": "Global Events FAQ",
+            "name": "faq_events_items",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add, remove or drag to reorder. Rows with an empty question or answer are ignored. Only questions you actually answer on the page are published (and added to structured data).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "button_label": "Add question",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_rm_faq_events_items_question",
+                    "label": "Question",
+                    "name": "question",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_rm_faq_events_items"
+                },
+                {
+                    "key": "field_rm_faq_events_items_answer",
+                    "label": "Answer",
+                    "name": "answer",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 4,
+                    "new_lines": "wpautop",
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_rm_faq_events_items"
+                }
+            ]
+        },
+        {
+            "key": "field_rm_tab_opt_apps",
+            "label": "Vendor Applications",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_rm_apps_enabled",
+            "label": "Applications are open",
+            "name": "apps_enabled",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Turn off to close the form (the page stays visible).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_apps_notify_email",
+            "label": "Notification email",
+            "name": "apps_notify_email",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "Receives a short alert for each new application (no applicant details). Defaults to the site admin email.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_apps_ack_applicant",
+            "label": "Email an acknowledgement to the applicant",
+            "name": "apps_ack_applicant",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Sends a generic \"we received your application\" message.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 0,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_apps_deadline",
+            "label": "Application deadline (optional)",
+            "name": "apps_deadline",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "After this date the form closes. Leave empty for year-round applications.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d\/m\/Y",
+            "return_format": "Y-m-d",
+            "first_day": 1,
+            "default_to_current_date": 0
+        },
+        {
+            "key": "field_rm_apps_fee_enabled",
+            "label": "Charge an application fee",
+            "name": "apps_fee_enabled",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Only enable if a fee really applies. No payment is collected on the site: applicants just acknowledge the fee.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 0,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_rm_apps_fee_amount",
+            "label": "Fee amount",
+            "name": "apps_fee_amount",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. \"25\"",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_rm_apps_fee_enabled",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_apps_fee_description",
+            "label": "Fee description",
+            "name": "apps_fee_description",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. \"one-time administration fee, payable if approved\"",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_rm_apps_fee_enabled",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_apps_booth",
+            "label": "Booth \/ stall requirements",
+            "name": "apps_booth",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Shown on the Become a Vendor page. Only state real requirements.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "new_lines": "",
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rm_apps_instructions",
+            "label": "Application instructions",
+            "name": "apps_instructions",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Short text above the form.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "new_lines": "",
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_rm_apps_success",
+            "label": "Success message",
+            "name": "apps_success",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Thank you for applying! Your application has been received. Our team will review your information and contact you about the next steps.",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_rm_apps_terms",
+            "label": "Extra terms (optional)",
+            "name": "apps_terms",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Shown above the consent checkbox.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "new_lines": "",
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
             "key": "field_rm_tab_appearance",
             "label": "Appearance",
             "name": "",
@@ -1161,5 +1659,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1794949596
+    "modified": 1794952285
 }

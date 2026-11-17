@@ -224,38 +224,6 @@
   }
 }
 
-// ---------- FAQ ----------
-.faq {
-  display: grid;
-  gap: var(--sp-3);
-
-  &__item {
-    background: var(--c-surface);
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-md);
-
-    &[open] { border-color: var(--c-secondary-600); }
-  }
-
-  &__question {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--sp-4);
-    min-height: 56px;
-    padding: var(--sp-3) var(--sp-5);
-    cursor: pointer;
-    font-weight: var(--fw-heavy);
-    list-style: none;
-
-    &::-webkit-details-marker { display: none; }
-  }
-
-  &__icon { width: 20px; height: 20px; color: var(--c-secondary-600); transition: transform var(--t-base); }
-  &__item[open] &__icon { transform: rotate(180deg); }
-  &__answer { padding: 0 var(--sp-5) var(--sp-5); color: var(--c-text-soft); }
-}
-
 // ---------- Gallery / related ----------
 .gallery-grid {
   display: grid;

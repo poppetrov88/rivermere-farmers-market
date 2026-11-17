@@ -1,0 +1,149 @@
+@use '../abstracts/mixins' as m;
+
+// ---------- Story / seasons (image + text) ----------
+.story {
+  padding-block: var(--section-space-md);
+
+  &__grid {
+    display: grid;
+    gap: var(--sp-7);
+    align-items: center;
+
+    @include m.up(lg) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-10); }
+  }
+
+  &__media {
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+  }
+
+  &__img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; }
+  &__title { font-size: var(--fs-h2); line-height: 1.1; max-width: 16ch; }
+  &__lead { margin: var(--sp-4) 0 var(--sp-5); font-size: var(--fs-lead); color: var(--c-text-soft); }
+
+  .entry-content { margin-top: var(--sp-5); font-size: 1.0625rem; }
+}
+
+// ---------- Mission ----------
+.mission {
+  padding-block: var(--section-space-md);
+
+  &__panel {
+    display: grid;
+    gap: var(--sp-7);
+    padding: var(--sp-7) var(--sp-6);
+    background: linear-gradient(135deg, var(--c-primary-900), var(--c-primary-600));
+    border-radius: var(--radius-xl);
+    color: #fff;
+
+    @include m.up(lg) { grid-template-columns: 1.2fr 1fr; align-items: center; padding: var(--sp-10); gap: var(--sp-9); }
+  }
+
+  &__title { color: #fff; font-size: var(--fs-h2); line-height: 1.12; }
+  &__text p { margin-top: var(--sp-4); max-width: 52ch; color: rgb(255 255 255 / 88%); font-size: 1.0625rem; }
+
+  &__points {
+    display: grid;
+    gap: var(--sp-3);
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      padding: var(--sp-3) var(--sp-4);
+      background: rgb(255 255 255 / 10%);
+      border-radius: var(--radius-md);
+      font-weight: var(--fw-bold);
+    }
+
+    .icon { flex: none; width: 22px; height: 22px; margin-top: 2px; color: var(--c-accent-400); stroke-width: 2.6; }
+  }
+}
+
+// ---------- Plan your visit ----------
+.visit {
+  padding-block: var(--section-space-md);
+
+  &__panel {
+    display: grid;
+    gap: var(--sp-7);
+    padding: var(--sp-7) var(--sp-6);
+    background: var(--c-leaf-100);
+    border-radius: var(--radius-xl);
+
+    @include m.up(lg) { grid-template-columns: 1fr 1fr; align-items: center; padding: var(--sp-9); gap: var(--sp-9); }
+  }
+
+  &__intro p { margin-top: var(--sp-3); color: var(--c-text-soft); font-size: var(--fs-lead); }
+  &__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-5); }
+
+  &__card {
+    padding: var(--sp-6);
+    background: var(--c-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  &__name { margin-bottom: var(--sp-4); font-size: 1.375rem; }
+  &__list { display: grid; gap: var(--sp-4); }
+
+  &__list dt {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: var(--c-text-soft);
+    font-size: var(--fs-caption);
+    font-weight: var(--fw-heavy);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+
+    .icon { width: 18px; height: 18px; color: var(--c-secondary-600); }
+  }
+
+  &__list dd { padding-left: calc(18px + var(--sp-2)); font-weight: var(--fw-bold); }
+  &__list a { color: var(--c-secondary-600); }
+}
+
+// ---------- Community CTA ----------
+.community-cta {
+  padding-block: var(--section-space-md);
+
+  &__grid {
+    display: grid;
+    gap: var(--sp-5);
+
+    @include m.up(md) { grid-template-columns: repeat(2, 1fr); }
+  }
+}
+
+.community-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-7);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+
+  h3 { font-size: 1.5rem; }
+  p { flex: 1; color: var(--c-text-soft); }
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    background: var(--c-leaf-100);
+    border-radius: 18px;
+    color: var(--c-secondary-600);
+
+    .icon { width: 28px; height: 28px; }
+  }
+
+  &--vendor { background: var(--c-primary-700); border-color: var(--c-primary-700); color: #fff; h3 { color: #fff; } p { color: rgb(255 255 255 / 85%); } .community-card__icon { background: rgb(255 255 255 / 12%); color: var(--c-accent-400); } }
+}
+
+.about-vendors { padding-block: var(--section-space-md); }

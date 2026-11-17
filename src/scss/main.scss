@@ -7,9 +7,12 @@
 @use 'layout/footer';
 @use 'components/buttons';
 @use 'components/cards';
+@use 'components/faq';
 @use 'components/breadcrumbs';
 @use 'components/ui';
 @use 'components/cookie';
 @use 'sections/hero';
 @use 'sections/sections';
 @use 'pages/event';
+@use 'pages/landing';
+@use 'pages/about';
